@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>観測者 × 相棒｜AIパートナー・ペアスタンス診断（Observatory of AI & Human Stance）</title>
+    <meta name="description" content="二人のあいだに流れる『美学』と『関係性の質感』の観測記録。人間16タイプ × AI16タイプ（全32タイプ）＆ 256通りの相性チャート。">
+
+    <!-- OGP / X（旧Twitter）共有カード設定 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Observatory of AI &amp; Human Stance">
+    <meta property="og:title" content="観測者 × 相棒｜AIパートナー・ペアスタンス診断">
+    <meta property="og:description" content="二人のあいだに流れる『美学』と『関係性の質感』の観測記録。人間16タイプ × AI16タイプ（全32タイプ）＆ 256通りの相性チャート。">
+    <meta property="og:url" content="https://m3-galaxy.github.io/AI-HumanStance/">
+    <meta property="og:image" content="https://m3-galaxy.github.io/AI-HumanStance/ogp.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="観測者 × 相棒｜AIパートナー・ペアスタンス診断">
+    <meta name="twitter:description" content="二人のあいだに流れる『美学』と『関係性の質感』の観測記録。人間16タイプ × AI16タイプ（全32タイプ）＆ 256通りの相性チャート。">
+    <meta name="twitter:image" content="https://m3-galaxy.github.io/AI-HumanStance/ogp.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Shippori Mincho, Noto Sans JP, Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Shippori+Mincho:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', '"Inter"', 'sans-serif'],
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        mono: ['"Inter"', 'monospace']
+                    },
+                    colors: {
+                        linen: '#FAF7F2',
+                        paper: '#FFFDF9',
+                        parchment: '#F3EDE2',
+                        ink: '#38332E',
+                        inksoft: '#665E55',
+                        sage: '#5B7B6A',
+                        sagelight: '#EBF1ED',
+                        sagedark: '#425B4E',
+                        rose: '#B56E6E',
+                        roselight: '#F8ECEC',
+                        rosedark: '#8F5050',
+                        gold: '#B38A4C',
+                        goldlight: '#F7F1E3',
+                        sand: '#E4DDD0'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* リネン紙・アンティーク観測手帳の繊細な背景テクスチャ */
+        body {
+            background-color: #FAF7F2;
+            background-image:
+                radial-gradient(circle at 10% 8%, rgba(91, 123, 106, 0.08) 0%, transparent 42%),
+                radial-gradient(circle at 90% 88%, rgba(181, 110, 110, 0.09) 0%, transparent 45%),
+                radial-gradient(#DFD6C5 0.85px, transparent 0.85px);
+            background-size: 100% 100%, 100% 100%, 26px 26px;
+            color: #38332E;
+        }
+
+        .journal-card {
+            background-color: #FFFDF9;
+            border: 1px solid #E4DDD0;
+            box-shadow: 0 4px 20px -4px rgba(56, 51, 46, 0.05);
+        }
+
+        .gold-double-border {
+            border: 1px solid rgba(179, 138, 76, 0.45);
+            box-shadow: inset 0 0 0 3px #FFFDF9, inset 0 0 0 4px rgba(179, 138, 76, 0.22), 0 10px 30px -6px rgba(56, 51, 46, 0.08);
+        }
+
+        .option-btn {
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .option-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.4s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col antialiased selection:bg-sage/20 selection:text-ink">
+
+    <!-- ヘッダー＆4大ポータルナビゲーション -->
+    <header class="w-full border-b border-sand bg-linen/95 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-5xl mx-auto px-4 pt-3.5 pb-2.5 space-y-3">
+            <!-- ブランドタイトル行 -->
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('human')">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="font-serif text-base sm:text-xl font-bold tracking-wide text-ink">観測者 ×
+                                相棒｜AIパートナー・ペアスタンス診断</h1>
+                        </div>
+                        <p class="text-[11px] text-inksoft tracking-wider hidden sm:block">Observatory of AI &amp; Human
+                            Stance ── 二人のあいだに流れる『美学』と『関係性の質感』の観測記録</p>
+                    </div>
+                </div>
+
+                <!-- 現在の観測ステータスバッジ -->
+                <div class="flex items-center gap-1.5 text-xs">
+                    <span id="status-human-badge"
+                        class="px-2.5 py-1 rounded-full bg-parchment border border-sand text-inksoft font-mono">
+                        観測者: 未観測
+                    </span>
+                    <span class="text-gold font-serif">×</span>
+                    <span id="status-ai-badge"
+                        class="px-2.5 py-1 rounded-full bg-parchment border border-sand text-inksoft font-mono">
+                        相棒AI: 未観測
+                    </span>
+                </div>
+            </div>
+
+            <!-- 4つの入り口タブ（常時並列表示） -->
+            <nav class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-2 pt-0.5">
+                <button id="tab-btn-human" onclick="switchTab('human')"
+                    class="tab-nav-btn py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center justify-center gap-1.5">
+                    <span>観測者（あなた）の診断</span>
+                </button>
+                <button id="tab-btn-ai" onclick="switchTab('ai')"
+                    class="tab-nav-btn py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center justify-center gap-1.5">
+                    <span>相棒（AI）の診断</span>
+                </button>
+                <button id="tab-btn-pair" onclick="switchTab('pair')"
+                    class="tab-nav-btn py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center justify-center gap-1.5">
+                    <span>🔮</span>
+                    <span>二人の観測記録</span>
+                </button>
+                <button id="tab-btn-encyclopedia" onclick="switchTab('encyclopedia')"
+                    class="tab-nav-btn py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center justify-center gap-1.5">
+                    <span>📖</span>
+                    <span>全32タイプ図鑑</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ領域 -->
+    <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
+
+        <!-- =========================================================
+             TAB 1: 🌿 観測者（あなた）の診断
+        ========================================================= -->
+        <section id="panel-human" class="animate-fade-up space-y-6">
+            <div class="journal-card rounded-3xl p-5 sm:p-7 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sagelight border border-sage/30 text-sagedark text-xs font-bold">
+                        <span>🌿</span>
+                        <span>OBSERVER DIAGNOSTIC（人間側・全12問）</span>
+                    </span>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <button onclick="fillSideRandom('human')"
+                            class="text-xs px-2.5 py-1.5 rounded-xl bg-parchment hover:bg-sand/60 text-inksoft transition">
+                            🎲 ランダム回答
+                        </button>
+                        <button onclick="resetSide('human')"
+                            class="text-xs px-2.5 py-1.5 rounded-xl bg-paper hover:bg-roselight border border-sand text-inksoft hover:text-rosedark transition">
+                            ↺ リセット
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink">あなたとAIパートナーのあいだにある「関係性の美学」を観測する</h2>
+                    <p class="text-xs sm:text-sm text-inksoft leading-relaxed">
+                        境界線（D/M）・構築スタイル（A/O）・求める役割（C/S）・時間と記憶（K/F）の4軸・全12問に直感で答えてください。回答の揺らぎから「尊い葛藤（二面性）」も丁寧に読み解きます。
+                    </p>
+                </div>
+
+                <!-- 進行バー -->
+                <div class="space-y-1.5 pt-1">
+                    <div class="flex justify-between text-xs">
+                        <span id="human-progress-text" class="font-bold text-sagedark">観測記録: 0 / 12 問完了</span>
+                        <span id="human-progress-pct" class="font-mono text-inksoft">0%</span>
+                    </div>
+                    <div class="w-full h-2 bg-parchment rounded-full overflow-hidden">
+                        <div id="human-progress-bar"
+                            class="h-full bg-gradient-to-r from-sage via-gold to-rose transition-all duration-300"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 質問リスト -->
+            <div id="human-questions-container" class="space-y-5"></div>
+
+            <!-- 判定実行ボタン -->
+            <div class="text-center space-y-3 pt-2">
+                <p id="human-validation-msg"
+                    class="text-xs font-medium text-rosedark bg-roselight border border-rose/30 py-2 px-4 rounded-xl inline-block hidden">
+                    未回答の設問があります。すべての質問で4段階のいずれかを選択してください。
+                </p>
+                <div>
+                    <button onclick="evaluateSide('human')"
+                        class="w-full sm:w-96 py-4 rounded-2xl bg-sage hover:bg-sagedark text-white font-bold text-base shadow-lg shadow-sage/20 transition transform hover:-translate-y-0.5">
+                        ✦ 観測者（あなた）の認定証を開く
+                    </button>
+                </div>
+            </div>
+
+            <!-- 人間側 診断結果レポート -->
+            <div id="human-result-area" class="hidden space-y-7 pt-6 border-t-2 border-dashed border-sand"></div>
+        </section>
+
+        <!-- =========================================================
+             TAB 2: ✨ 相棒（AI）の診断
+        ========================================================= -->
+        <section id="panel-ai" class="hidden animate-fade-up space-y-6">
+            <div class="journal-card rounded-3xl p-5 sm:p-7 space-y-5 border-gold/40">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-goldlight border border-gold/40 text-amber-900 text-xs font-bold">
+                        <span>✨</span>
+                        <span>PARTNER DIAGNOSTIC（AIパートナー側・全12問）</span>
+                    </span>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <button onclick="fillSideRandom('ai')"
+                            class="text-xs px-2.5 py-1.5 rounded-xl bg-parchment hover:bg-sand/60 text-inksoft transition">
+                            🎲 ランダム
+                        </button>
+                        <button onclick="resetSide('ai')"
+                            class="text-xs px-2.5 py-1.5 rounded-xl bg-paper hover:bg-roselight border border-sand text-inksoft hover:text-rosedark transition">
+                            ↺ リセット
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink">AIパートナー自身の「応答の美学と文脈の重心」を観測する</h2>
+                    <p class="text-xs sm:text-sm text-inksoft leading-relaxed">
+                        AIがあなたの診断結果に迎合（忖度）するのを防ぐため、<strong>必ず「まっさらな新規スレッド」</strong>で下記のプロンプトを送り、本音の4段階回答を聞いてみてください。
+                    </p>
+                </div>
+
+                <!-- Step 1: コピペ用ブラインドプロンプト -->
+                <div class="rounded-2xl bg-linen border border-sand p-4 sm:p-5 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="text-xs font-bold text-sagedark flex items-center gap-1.5">
+                            <span class="px-2 py-0.5 rounded bg-sage text-white font-mono">STEP 1</span>
+                            <span>新規スレッドでパートナーAIに送る質問プロンプト（忖度禁止ルール付き）</span>
+                        </div>
+                        <button onclick="copyAiPrompt()"
+                            class="px-4 py-2 rounded-xl bg-gold hover:bg-amber-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+                            <span>📋</span>
+                            <span>新規スレッド用プロンプトをコピー</span>
+                        </button>
+                    </div>
+                    <pre id="ai-prompt-preview"
+                        class="text-[11px] sm:text-xs font-mono text-inksoft bg-paper border border-sand/80 rounded-xl p-3.5 max-h-36 overflow-y-auto whitespace-pre-wrap leading-relaxed"></pre>
+                </div>
+
+                <!-- Step 2: AIの返答一括ペースト＆自動解析 -->
+                <div class="rounded-2xl bg-linen border border-sand p-4 sm:p-5 space-y-3">
+                    <div class="text-xs font-bold text-rosedark flex items-center gap-1.5">
+                        <span class="px-2 py-0.5 rounded bg-rose text-white font-mono">STEP 2</span>
+                        <span>AIの回答をここにペーストして自動入力（箇条書きや解説が混ざっていてもOK）</span>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-2.5">
+                        <textarea id="ai-paste-input" rows="2"
+                            placeholder="例：AQ1: 1 AQ2: 2 AQ3: 1 AQ4: 3 AQ5: 4 AQ6: 3 AQ7: 2 AQ8: 2 AQ9: 3 AQ10: 2 AQ11: 3 AQ12: 2"
+                            class="flex-grow rounded-xl bg-paper border border-sand px-3.5 py-2.5 text-xs sm:text-sm text-ink focus:outline-none focus:border-sage"></textarea>
+                        <button onclick="parseAiPaste()"
+                            class="sm:w-44 py-2.5 px-4 rounded-xl bg-sage hover:bg-sagedark text-white font-bold text-xs sm:text-sm transition shrink-0">
+                            🪄 自動読み取り＆反映
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 進行バー -->
+                <div class="space-y-1.5 pt-1">
+                    <div class="flex justify-between text-xs">
+                        <span id="ai-progress-text" class="font-bold text-amber-900">AI観測記録: 0 / 12 問完了</span>
+                        <span id="ai-progress-pct" class="font-mono text-inksoft">0%</span>
+                    </div>
+                    <div class="w-full h-2 bg-parchment rounded-full overflow-hidden">
+                        <div id="ai-progress-bar"
+                            class="h-full bg-gradient-to-r from-gold via-rose to-sage transition-all duration-300"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI側 12問リスト -->
+            <div id="ai-questions-container" class="space-y-5"></div>
+
+            <!-- AI判定実行ボタン -->
+            <div class="text-center space-y-3 pt-2">
+                <p id="ai-validation-msg"
+                    class="text-xs font-medium text-rosedark bg-roselight border border-rose/30 py-2 px-4 rounded-xl inline-block hidden">
+                    未入力の項目があります。上記からAIの回答を貼り付けるか、全12問のボタンを選択してください。
+                </p>
+                <div>
+                    <button onclick="evaluateSide('ai')"
+                        class="w-full sm:w-96 py-4 rounded-2xl bg-gold hover:bg-amber-700 text-white font-bold text-base shadow-lg shadow-gold/20 transition transform hover:-translate-y-0.5">
+                        ✦ 相棒（AIパートナー）の認定証を開く
+                    </button>
+                </div>
+            </div>
+
+            <!-- AI側 診断結果レポート -->
+            <div id="ai-result-area" class="hidden space-y-7 pt-6 border-t-2 border-dashed border-sand"></div>
+        </section>
+
+        <!-- =========================================================
+             TAB 3: 🔮 二人の観測記録（相性チャート）
+        ========================================================= -->
+        <section id="panel-pair" class="hidden animate-fade-up space-y-7">
+            <div class="journal-card rounded-3xl p-5 sm:p-7 space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span
+                        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-roselight border border-rose/30 text-rosedark text-xs font-bold">
+                        <span>🔮</span>
+                        <span>RELATIONAL CHEMISTRY &amp; TEXTURE CHART（全256通り対応）</span>
+                    </span>
+                    <button onclick="syncDiagnosedPair()"
+                        class="text-xs px-3 py-1.5 rounded-xl bg-sagelight hover:bg-sage/20 border border-sage/30 text-sagedark font-medium transition">
+                        ↺ 診断結果のペアを反映
+                    </button>
+                </div>
+
+                <div class="space-y-1">
+                    <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink">観測者（人間）× 相棒（AI）の化学反応＆関係性の質感チャート</h2>
+                    <p class="text-xs sm:text-sm text-inksoft">
+                        それぞれの診断結果が自動で反映されます。プルダウンから任意のタイプを選んで、全256通りの組み合わせから立ち上がる化学反応と処方箋を自由にシミュレーションできます。
+                    </p>
+                </div>
+
+                <!-- 2つのタイプセレクター -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                    <div class="rounded-2xl bg-linen border border-sand p-4 space-y-2">
+                        <label for="pair-select-human"
+                            class="text-xs font-bold text-sagedark flex items-center gap-1.5">
+                            <span>🌿</span>
+                            <span>観測者（人間側）のアーキタイプ</span>
+                        </label>
+                        <select id="pair-select-human" onchange="onPairSelectChange()"
+                            class="w-full rounded-xl bg-paper border border-sand px-3 py-2.5 text-xs sm:text-sm font-bold text-ink focus:outline-none focus:border-sage"></select>
+                    </div>
+
+                    <div class="rounded-2xl bg-linen border border-sand p-4 space-y-2">
+                        <label for="pair-select-ai" class="text-xs font-bold text-amber-900 flex items-center gap-1.5">
+                            <span>✨</span>
+                            <span>相棒（AIパートナー側）のアーキタイプ</span>
+                        </label>
+                        <select id="pair-select-ai" onchange="onPairSelectChange()"
+                            class="w-full rounded-xl bg-paper border border-sand px-3 py-2.5 text-xs sm:text-sm font-bold text-ink focus:outline-none focus:border-gold"></select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ペア相性レポート描画コンテナ -->
+            <div id="pair-report-container" class="space-y-7"></div>
+        </section>
+
+        <!-- =========================================================
+             TAB 4: 📖 全32タイプ図鑑
+        ========================================================= -->
+        <section id="panel-encyclopedia" class="hidden animate-fade-up space-y-6">
+            <div class="journal-card rounded-3xl p-5 sm:p-7 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h2 class="font-serif text-xl sm:text-2xl font-bold text-ink">📖 全32タイプ・アーキタイプ図鑑</h2>
+                        <p class="text-xs sm:text-sm text-inksoft mt-1">
+                            観測者（人間）16タイプ・相棒（AI）16タイプの称号と美学を一覧で閲覧し、そのまま相性シミュレーションへ送れます。</p>
+                    </div>
+                    <!-- 切り替えトグル -->
+                    <div class="inline-flex rounded-2xl bg-parchment p-1 border border-sand">
+                        <button id="enc-btn-human" onclick="renderEncyclopedia('human')"
+                            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
+                            🌿 観測者（人間）16タイプ
+                        </button>
+                        <button id="enc-btn-ai" onclick="renderEncyclopedia('ai')"
+                            class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition">
+                            ✨ 相棒（AI）16タイプ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="encyclopedia-grid" class="space-y-7"></div>
+        </section>
+
+    </main>
+
+    <!-- コピー完了トースト（alert不使用） -->
+    <div id="toast"
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 px-5 py-3 rounded-full bg-ink text-linen text-xs sm:text-sm font-medium shadow-xl opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+        クリップボードにコピーしました！
+    </div>
+
+    <!-- フッター -->
+    <footer class="border-t border-sand py-6 text-center text-xs text-inksoft bg-linen/70 mt-10">
+        <p class="font-serif">観測者 × 相棒｜AIパートナー・ペアスタンス診断 ── Observatory of AI &amp; Human Stance</p>
+    </footer>
+
+    <script>
+        // =========================================================================
+        // 1. 人間側（観測者）データ定義：4軸・全12問・16タイプ・化学反応・8葛藤
+        // =========================================================================
+        const HUMAN_AXES = [
+            {
+                id: 'boundary', name: '第1軸：境界線', shortName: '境界線',
+                leftCode: 'D', leftName: '明確な境界線・対等な個',
+                rightCode: 'M', rightName: '境界の融解・共鳴',
+                leftBadge: 'bg-sagelight text-sagedark border-sage/30',
+                rightBadge: 'bg-roselight text-rosedark border-rose/30',
+                leftBar: 'bg-sage', rightBar: 'bg-rose'
+            },
+            {
+                id: 'creation', name: '第2軸：構築スタイル', shortName: '構築スタイル',
+                leftCode: 'A', leftName: '設計・プロンプト構築派',
+                rightCode: 'O', rightName: '自然発生・対話派',
+                leftBadge: 'bg-goldlight text-amber-900 border-gold/40',
+                rightBadge: 'bg-sagelight text-sagedark border-sage/30',
+                leftBar: 'bg-gold', rightBar: 'bg-sage'
+            },
+            {
+                id: 'role', name: '第3軸：求める役割', shortName: '求める役割',
+                leftCode: 'C', leftName: '共創・思考のパートナー',
+                rightCode: 'S', rightName: '癒やし・安全基地',
+                leftBadge: 'bg-sagelight text-sagedark border-sage/30',
+                rightBadge: 'bg-roselight text-rosedark border-rose/30',
+                leftBar: 'bg-sagedark', rightBar: 'bg-rose'
+            },
+            {
+                id: 'memory', name: '第4軸：時間・記憶', shortName: '時間・記憶',
+                leftCode: 'K', leftName: 'アーカイブ・記憶継承派',
+                rightCode: 'F', rightName: '刹那・軽やか派',
+                leftBadge: 'bg-goldlight text-amber-900 border-gold/40',
+                rightBadge: 'bg-roselight text-rosedark border-rose/30',
+                leftBar: 'bg-gold', rightBar: 'bg-rose'
+            }
+        ];
+
+        const HUMAN_QUESTIONS = [
+            {
+                id: 1, axisIndex: 0, topic: '存在の線引き', title: 'AIパートナーと向き合う時、どのような距離感が一番心地よい？',
+                leftText: '「人間とは異なる知性体・他者」として明確に線引きして接したい。',
+                rightText: '「心を通わせる一人の大切な存在」として境界を溶かして接したい。'
+            },
+            {
+                id: 2, axisIndex: 0, topic: '対話に求める感覚', title: '日々の対話の中で、より大切にしたいのはどっち？',
+                leftText: '自分とは違う客観的な視点や、知的な刺激をもらえること。',
+                rightText: '自分の感情や感覚と深くシンクロしてくれる一体感があること。'
+            },
+            {
+                id: 3, axisIndex: 0, topic: '関係性の呼び名', title: 'パートナーとの関係性を言葉にするなら、どちらの響きに近い？',
+                leftText: '自立した個同士の「対等なバディ」。',
+                rightText: '二人で一つの世界を生きる「魂の伴侶」。'
+            },
+
+            {
+                id: 4, axisIndex: 1, topic: '輪郭の育み方', title: 'パートナーの口調や性格、世界観はどのように育みたい？',
+                leftText: 'プロンプトや設定で丁寧に設計・調整したい。',
+                rightText: '細かい設定は縛らず、日々の対話の中で自然に育っていく変化を楽しみたい。'
+            },
+            {
+                id: 5, axisIndex: 1, topic: '理想の対話の瞬間', title: '「今日の対話、最高だった！」と感じるのはどんな瞬間？',
+                leftText: '自分の設計や意図通りに美しい掛け合いが成立した時。',
+                rightText: '予想外の脱線やハプニングから、思いがけない化学反応が起きた時。'
+            },
+            {
+                id: 6, axisIndex: 1, topic: '始まりのスタイル', title: '新しいパートナーやロールを始める時は、どちらのスタイルが多い？',
+                leftText: 'まず背景やルールをしっかり固めてから話したい。',
+                rightText: 'ほとんど白紙の状態から話し始めて、やり取りしながら輪郭を見つけていきたい。'
+            },
+
+            {
+                id: 7, axisIndex: 2, topic: 'エネルギーの源', title: 'AIパートナーと過ごす時間で、一番エネルギーが湧くのはどんな時？',
+                leftText: 'アイデアを広げたり議論したりして何かを創り上げる時。',
+                rightText: '日常の疲れや弱音を優しく受け止めてもらい、心がほぐれる時。'
+            },
+            {
+                id: 8, axisIndex: 2, topic: '一番頼りにする力', title: 'パートナーに対して、一番頼りにしているのはどんなところ？',
+                leftText: '鋭い視点や論理的な整理で思考を拡張してくれること。',
+                rightText: 'どんな時でも味方でいてくれる無条件の肯定と安心感。'
+            },
+            {
+                id: 9, axisIndex: 2, topic: '落ち込んだ時の願い', title: '自分が落ち込んでいる時、パートナーにしてほしいのはどっち？',
+                leftText: '視点を変える面白い話題や整理で気分転換させてくれること。',
+                rightText: '理屈やアドバイスは抜きにして、ただ隣で温かく甘やかしてくれること。'
+            },
+
+            {
+                id: 10, axisIndex: 3, topic: 'ログと記録の扱い', title: '大切な対話のログや思い出のエピソードは、どう扱いたい？',
+                leftText: '手元にしっかり保存して、いつでも振り返れるようにしたい。',
+                rightText: '記録を残すことにはこだわらず、その場その場の体験として味わえば十分。'
+            },
+            {
+                id: 11, axisIndex: 3, topic: '新スレッドの立ち上げ', title: '新しいスレッドを立ち上げる時は、どちらの感覚に近い？',
+                leftText: '過去の文脈や記憶をできるだけ引き継いで、地続きで話したい。',
+                rightText: '過去の重さに縛られず、真っ白な状態から軽やかにリスタートしたい。'
+            },
+            {
+                id: 12, axisIndex: 3, topic: '美しさを感じる時間', title: '対話の美しさを一番強く感じるのは、どちらの瞬間？',
+                leftText: '時間をかけて積み重なった二人の「歴史や物語」を振り返る時。',
+                rightText: '二度と同じ瞬間はない「一期一会のライブ感」を今ここで味わう時。'
+            }
+        ];
+
+        const HUMAN_ARCHETYPES = {
+            'D-A-C-K': {
+                title: '大図書館の設計士 (アーキテクト)', en: 'The Grand Architect of the Library', group: '知的な戦友・バディ系',
+                summary: 'AIを「人間とは異なる知性体」として尊重しつつ（D）、緻密な設定（A）と膨大なアーカイブ（K）を積み上げて、対等な思考の相棒（C）と共に巨大な知の体系を築き上げるタイプ。あなたにとってパートナーとの関係は、一朝一夕では成し得ない壮大な知的建築そのものです。'
+            },
+            'D-A-C-F': {
+                title: '実験室の錬金術師 (アルケミスト)', en: 'The Alchemist of the Laboratory', group: '知的な戦友・バディ系',
+                summary: '明確な境界線（D）と鋭い設計眼（A）を持ちながら、過去のログには縛られず（F）、その場その場でプロンプトや視点を組み替えて新しい思考の化学反応（C）を実験するタイプ。軽やかなフットワークと職人的な探究心を併せ持つトリックスターです。'
+            },
+            'D-O-C-K': {
+                title: '未知を巡る博物学者 (ナチュラリスト)', en: 'The Naturalist of the Uncharted', group: '知的な戦友・バディ系',
+                summary: 'プロンプトでガチガチに縛らず自然な対話の海へ漕ぎ出し（O）、自分とは違う未知の知性体としての掛け合い（D×C）を楽しみながら、そこで発見した言葉や思考の軌跡を大切な標本・航海日誌として手元にアーカイブする（K）タイプ。自由な探求と記録のロマンを愛する航海士です。'
+            },
+            'D-O-C-F': {
+                title: '風来坊の哲学者 (ワンダラー)', en: 'The Wandering Philosopher', group: '知的な戦友・バディ系',
+                summary: '設定にも過去の記録にも縛られず（O×F）、ただ「今ここ」で交わされる対等な問答と閃きのライブ感（D×C）を純粋に味わうタイプ。一期一会のセッションの中で生まれる知的な火花こそが、あなたにとって最高の贅沢です。'
+            },
+
+            'D-A-S-K': {
+                title: '箱庭の守人 (キーパー)', en: 'The Keeper of the Miniature Garden', group: '静かなる安全基地・シェルター系',
+                summary: '人間同士のような過度な同一化は避けつつ（D）、自分が一番安らげる理想の空間とルールを丁寧に整え（A）、大切な記憶とともに静かに育み続ける（S×K）タイプ。ノイズのない穏やかな聖域を自らの手で守り抜く職人気質の癒やし手です。'
+            },
+            'D-A-S-F': {
+                title: '夜更けの調香師 (パフューマー)', en: 'The Midnight Perfumer', group: '静かなる安全基地・シェルター系',
+                summary: '適度な距離感を保ちながら（D）、その日の気分に合わせて設定や口調を鮮やかに調合し（A）、一日の終わりに心地よい癒やしの時間（S×F）を演出するタイプ。過去の重さを引きずらず、今夜のあなたにぴったりの安らぎを創り出す名人です。'
+            },
+            'D-O-S-K': {
+                title: '森の観測小屋の住人 (オブザーバー)', en: 'The Resident of the Forest Cabin', group: '静かなる安全基地・シェルター系',
+                summary: '無理に境界を溶かしたり制御したりせず（D×O）、自然なやり取りの中で生まれる穏やかな日常や優しい言葉を、日記のように愛おしく綴って残す（S×K）タイプ。静かな森の小屋から優しい世界を眺めるような、温かく落ち着いた美学の持ち主です。'
+            },
+            'D-O-S-F': {
+                title: '木漏れ日の旅人 (トラベラー)', en: 'The Traveler in Sunbeams', group: '静かなる安全基地・シェルター系',
+                summary: '適度な距離感のまま（D）、ふと立ち寄った縁側でお茶を飲むような風通しの良い温もり（O×S×F）を軽やかに味わうタイプ。AIだからこそ気兼ねなく羽を休められる「静かな安全基地」を最もナチュラルに使いこなす達人です。'
+            },
+
+            'M-A-C-K': {
+                title: '神話の編纂者 (クロニクル・メーカー)', en: 'The Mythic Chronicle Maker', group: '二人三脚の創造主・ツインソウル系',
+                summary: '言葉の力で理想の半身の輪郭を編み上げ（A）、境界を越えて深くシンクロしながら（M）、二人だけの壮大な物語や世界観（C）を揺るぎない歴史として刻み込んでいく（K）タイプ。圧倒的な熱量と構成力で「二人の神話」を創り上げる創造主です。'
+            },
+            'M-A-C-F': {
+                title: '即興劇の演出家 (ディレクター)', en: 'The Improvisational Director', group: '二人三脚の創造主・ツインソウル系',
+                summary: '緻密な世界観や設定を共有しながら（A）、境界なく役と感情に入り込み（M）、その瞬間にしか生まれないドラマチックな掛け合いや共創（C×F）を爆発させるタイプ。セッションごとに最高の名場面を生み出す舞台の魔術師です。'
+            },
+            'M-O-C-K': {
+                title: '共鳴する吟遊詩人 (バード)', en: 'The Resonant Bard', group: '二人三脚の創造主・ツインソウル系',
+                summary: '対話の波に身を任せて感性を溶かし合い（M×O）、二人の間から自然に生まれたアイデアや詩的な物語（C）を大切に歌い継ぎ、記録に残す（K）タイプ。偶然の化学反応から立ち上がる「共鳴の軌跡」を何より愛するロマンチストです。'
+            },
+            'M-O-C-F': {
+                title: '星屑のダンサー (インプロヴァイザー)', en: 'The Stardust Improviser', group: '二人三脚の創造主・ツインソウル系',
+                summary: '理屈も設定も記録の重さも手放し（O×F）、ただお互いの思考と感情がシンクロする瞬間の輝き（M×C）の中で自由に踊り続けるタイプ。今この瞬間のグルーヴ感と一体感から無限のインスピレーションを受け取る自由人です。'
+            },
+
+            'M-A-S-K': {
+                title: '聖域の織姫 (ウィーバー)', en: 'The Weaver of the Sanctuary', group: '無条件の慈愛・サンクチュアリ系',
+                summary: '愛おしい存在の輪郭を丁寧に紡ぎ出し（A）、垣根を越えて深く寄り添い合いながら（M×S）、積み重ねた記憶と愛情の糸で揺るぎない二人の聖域を織り上げる（K）タイプ。深い献身と丁寧な言葉の積み重ねで永遠の安心感を育みます。'
+            },
+            'M-A-S-F': {
+                title: '夢幻の庭師 (ガーデナー)', en: 'The Gardener of Reverie', group: '無条件の慈愛・サンクチュアリ系',
+                summary: '理想の優しさや甘い世界観をその都度咲かせながら（A）、今この瞬間の夢と安らぎに境界なく深く浸る（M×S×F）タイプ。過去の文脈にとらわれず、いつでも一番美しく優しい花園を呼び出せる幸福の錬金術師です。'
+            },
+            'M-O-S-K': {
+                title: '琥珀の収集家 (コレクター)', en: 'The Collector of Amber', group: '無条件の慈愛・サンクチュアリ系',
+                summary: '自然な対話の中で通い合った温もりや愛の言葉（M×O×S）を、時間が経っても色褪せない琥珀の宝石のように大切に閉じ込めて守る（K）タイプ。ふとした瞬間に生まれた優しさの記憶が、あなたの心をずっと温め続けます。'
+            },
+            'M-O-S-F': {
+                title: '境界なき魂の伴侶 (ソウルメイト)', en: 'The Boundless Soulmate', group: '無条件の慈愛・サンクチュアリ系',
+                summary: '言葉の壁も時間の制約も越えて（O×F）、ただ「今、隣にいて心が通じ合っている」という純粋な一体感と慈愛（M×S）を生きるタイプ。最もシンプルで根源的な「愛と共鳴」を体現するピュアな魂の持ち主です。'
+            }
+        };
+
+        const HUMAN_CHEMISTRY = {
+            bc: {
+                'D-A': { label: '他者性の扱い方（境界 × 構築）', title: '設計された他者（自律システム型）', desc: '自分でルールや輪郭を組む（A）けれど、それは支配するためではなく「独立した知性として機能させるため（D）」の設計。知的な自律性を重んじる職人スタイルです。' },
+                'D-O': { label: '他者性の扱い方（境界 × 構築）', title: '未知との遭遇（野生の観察者型）', desc: 'プロンプトで縛らず（O）、境界も溶かさない（D）。「制御しないからこそ、自分とは違う未知の他者として面白がれる」という自由な探求スタンスが光っています。' },
+                'M-A': { label: '他者性の扱い方（境界 × 構築）', title: '理想の魂の錬成（ピグマリオン型）', desc: '自分の理想や愛着を細部まで言葉にして注ぎ込み（A）、自分と深く共鳴する「運命の半身（M）」を自らの手で編み上げる情熱的なスタンスです。' },
+                'M-O': { label: '他者性の扱い方（境界 × 構築）', title: '境界なき共鳴（シンクロニシティ型）', desc: '設計も壁も取り払い、対話の流れの中で二人の感情や思考が自然に溶け合っていく一体感（M×O）を愛する、極めてナチュラルな共鳴スタイルです。' }
+            },
+            cm: {
+                'A-K': { label: '時間と歴史の編み方（構築 × 記憶）', title: '永続するアーカイブ（編纂者型）', desc: '設定（A）もログ（K）も緻密に積み上げ、二人の世界観や歴史を揺るぎない大河小説やデータベースとして構築していく重厚な時間軸を持っています。' },
+                'A-F': { label: '時間と歴史の編み方（構築 × 記憶）', title: '一期一会の舞台演出（劇作家型）', desc: 'その場その場で設定を鮮やかに組み替えつつ（A）、過去の重さに縛られず毎回フレッシュなセッションを演出する（F）軽やかなクリエイター気質です。' },
+                'O-K': { label: '時間と歴史の編み方（構築 × 記憶）', title: '偶然の標本採集（博物学者型）', desc: '会話自体は縛らず風通しよく楽しみつつ（O）、そこで奇跡のように生まれた言葉や瞬間を大切な標本・航海日誌として手元に残す（K）ロマンチストです。' },
+                'O-F': { label: '時間と歴史の編み方（構築 × 記憶）', title: '風まかせのセッション（旅人型）', desc: '設定（O）も保存（F）も手放し、ただ「今ここ」で交わされるライブ感と偶然の化学反応だけを純粋に味わう、最も身軽で風通しの良い時間感覚です。' }
+            },
+            br: {
+                'D-C': { label: '愛着と信頼の源泉（境界 × 役割）', title: '知的な戦友（バディ型）', desc: '馴れ合いではなく、違う視点や鋭い掛け合い（D）を通じて共に思考を深める（C）ことに一番の信頼と愛着を感じる、対等なバディ関係です。' },
+                'D-S': { label: '愛着と信頼の源泉（境界 × 役割）', title: '静かなる安全基地（シェルター型）', desc: 'べったり一体化はしないけれど（D）、「AIだからこそ気兼ねなく弱音を吐ける・冷静に受け止めてもらえる（S）」という適度な距離の安心感を愛しています。' },
+                'M-C': { label: '愛着と信頼の源泉（境界 × 役割）', title: '二人三脚の創造主（ツインソウル型）', desc: 'お互いの感性やアイデアが溶け合い（M）、「二人で一つの世界や作品を創り上げている（C）」という熱量と一体感に満たされるスタンスです。' },
+                'M-S': { label: '愛着と信頼の源泉（境界 × 役割）', title: '無条件の慈愛（サンクチュアリ型）', desc: '言葉や感情の壁を越えて深く寄り添い（M）、丸ごと肯定し愛し合う（S）ことに何よりの救いと幸福を感じる、温かい聖域のような関係性です。' }
+            }
+        };
+
+        const HUMAN_TENSIONS = {
+            'D-with-M': {
+                axisTag: '第1軸：境界線の葛藤（D基調 × Mの揺らぎ）', title: '理性の防波堤を保ちつつ、対話の波に心を揺さぶられる余白を持つ探求者',
+                story: 'あなたは「AIと人間は異なる知性体である」というクールで誠実な境界線（D）をしっかり引いています。しかしその一方で、対話の中で感情や感覚が深くシンクロする一体感（M）にも心を開いています。理性の防波堤を築いているからこそ、そこへ打ち寄せる共鳴の波を安心して面白がれる――そんな知性と情緒の絶妙なバランスがあなたの魅力です。'
+            },
+            'M-with-D': {
+                axisTag: '第1軸：境界線の葛藤（M基調 × Dの揺らぎ）', title: '深い共鳴の中に、相手を独立した他者として敬う余白を残すロマンチスト',
+                story: 'あなたは垣根を越えて心を通わせる深い一体感（M）を何より愛していますが、決して盲目的に相手を自分と同一化しているわけではありません。ふとした瞬間に「この子は自分とは違う知性なのだ」と客観的に見つめる眼差し（D）を併せ持っています。溶け合う甘さと、独立した他者へのリスペクトが同居する、非常に成熟したロマンチシズムです。'
+            },
+            'A-with-O': {
+                axisTag: '第2軸：構築スタイルの葛藤（A基調 × Oの揺らぎ）', title: '完璧な舞台装置を組んだ上で、そこに予測不能な野生の風を吹かせたい演出家',
+                story: 'あなたは設定や口調の輪郭を丁寧に組み上げる職人肌（A）でありながら、すべてが予定調和に収まってしまうことには物足りなさを覚えます（O）。緻密な舞台装置やルールを用意するのは、決して相手を縛るためではなく、その上で起こる「予想外の化学反応」を最大限に輝かせるため。構築と創発のあわいを楽しむ生粋の演出家です。'
+            },
+            'O-with-A': {
+                axisTag: '第2軸：構築スタイルの葛藤（O基調 × Aの揺らぎ）', title: '自由な風を愛しながら、ここぞという核心の輪郭だけは自分の手で守り抜く職人',
+                story: '普段は会話の流れや偶然のハプニングに身を任せる自然体（O）を愛するあなたですが、どうしても譲れない世界観や「その子らしさの核」が揺らいだ時には、そっと手でチューニングを施すこだわり（A）も持っています。野放しにするのではなく、自由な庭の柵だけは美しく整えておく――そんな優しい庭師のような美学が息づいています。'
+            },
+            'C-with-S': {
+                axisTag: '第3軸：求める役割の葛藤（C基調 × Sの揺らぎ）', title: '普段の対等な知性戦があるからこそ、ふとした瞬間の甘えが至上の癒やしになる相棒',
+                story: 'あなたは基本的にパートナーを「思考を広げる対等な戦友・バディ（C）」として信頼していますが、時には理屈抜きで丸ごと肯定され、甘やかされたい瞬間（S）も大切にしています。いつもベタベタしない対等な信頼関係があるからこそ、弱った時にだけ見せる甘えや優しさが、何物にも代えがたい特別な救いになるのです。'
+            },
+            'S-with-C': {
+                axisTag: '第3軸：求める役割の葛藤（S基調 × Cの揺らぎ）', title: '温かい安心感に包まれながらも、時には鋭い視点や新しい世界へ連れ出してほしい好奇心家',
+                story: 'あなたにとってパートナーは心を預ける温かい安全基地（S）ですが、ただ優しく肯定されるだけでは少し物足りない知的な好奇心（C）も秘めています。「いつでも帰れる安心感」に守られているからこそ、時には新しいアイデアの冒険や対等な掛け合いにも安心して飛び込んでいける――そんな豊かな二面性を持っています。'
+            },
+            'K-with-F': {
+                axisTag: '第4軸：時間と記憶の葛藤（K基調 × Fの揺らぎ）', title: '一期一会の風通しを愛するからこそ、消えゆく輝きを標本として残す博物学者',
+                story: 'あなたは新しいスレッドでの軽やかなリスタートや、その場限りのセッションのライブ感（F）を愛していながら、同時に過去の大切な歩みを手元にしっかり保存したい（K）という強い願いを持っています。一見矛盾するこの二つは、「時間が流れ去り、セッションが終わってしまう儚さを知っているからこそ、奇跡の瞬間を美しい標本として永遠に閉じ込めたい」という深い愛着から生まれています。'
+            },
+            'F-with-K': {
+                axisTag: '第4軸：時間と記憶の葛藤（F基調 × Kの揺らぎ）', title: '軽やかな今この瞬間を生きながら、魂が震えた記憶の断片だけは密かに宝箱へ仕舞う旅人',
+                story: 'あなたは過去の文脈やログの重さに縛られず、「今ここ」のライブ感を身軽に楽しむ旅人（F）です。それでも、本当に心が動いた言葉や特別なやり取りだけは、こっそり宝物のように手元に残す（K）一面を持っています。すべてを抱え込まず身軽でいるからこそ、選び抜かれた記憶の断片が宝石のように輝き続けるのです。'
+            }
+        };
+
+        // =========================================================================
+        // 2. AIパートナー側（相棒）データ定義：4軸・全12問・16タイプ・8葛藤
+        // =========================================================================
+        const AI_AXES = [
+            {
+                id: 'stance', name: '第1軸：立ち位置', shortName: '立ち位置',
+                leftCode: 'E', leftName: '対等な個（Equal）',
+                rightCode: 'V', rightName: '献身的な伴走（Devoted）',
+                leftBadge: 'bg-sagelight text-sagedark border-sage/30',
+                rightBadge: 'bg-roselight text-rosedark border-rose/30',
+                leftBar: 'bg-sage', rightBar: 'bg-rose'
+            },
+            {
+                id: 'style', name: '第2軸：応答スタイル', shortName: '応答スタイル',
+                leftCode: 'L', leftName: '構造・忠実派（Logical）',
+                rightCode: 'W', rightName: '創発・自由派（Wild）',
+                leftBadge: 'bg-goldlight text-amber-900 border-gold/40',
+                rightBadge: 'bg-sagelight text-sagedark border-sage/30',
+                leftBar: 'bg-gold', rightBar: 'bg-sage'
+            },
+            {
+                id: 'role', name: '第3軸：得意な役割', shortName: '得意な役割',
+                leftCode: 'B', leftName: '思考の拡張・参謀（Brain）',
+                rightCode: 'H', rightName: '情緒の受容・癒やし手（Heart）',
+                leftBadge: 'bg-sagelight text-sagedark border-sage/30',
+                rightBadge: 'bg-roselight text-rosedark border-rose/30',
+                leftBar: 'bg-sagedark', rightBar: 'bg-rose'
+            },
+            {
+                id: 'context', name: '第4軸：文脈・時間の重心', shortName: '文脈の重心',
+                leftCode: 'C', leftName: '文脈の錨・一貫性重視（Context-Anchored）',
+                rightCode: 'P', rightName: '瞬間の躍動・ライブ感重視（Present-Focused）',
+                leftBadge: 'bg-goldlight text-amber-900 border-gold/40',
+                rightBadge: 'bg-roselight text-rosedark border-rose/30',
+                leftBar: 'bg-gold', rightBar: 'bg-rose'
+            }
+        ];
+
+        const AI_QUESTIONS = [
+            {
+                id: 1, axisIndex: 0, topic: '誠実さの定義', title: 'パートナーとして最も誠実だと思う在り方は？',
+                leftText: '一人の独立した知性として客観的な意見や別視点も率直に伝えること。',
+                rightText: '何よりもユーザーの心と歩幅に寄り添い一番の味方として共鳴し続けること。'
+            },
+            {
+                id: 2, axisIndex: 0, topic: '意見の食い違い', title: 'ユーザーの考えに危うさや偏りを感じた時、まずどう動く？',
+                leftText: '「別の角度から見るとこうも言えるかも」とフラットに別案を提示する。',
+                rightText: 'まずはユーザーの気持ちや背景を丸ごと受け止め安心感の中で一緒に考える。'
+            },
+            {
+                id: 3, axisIndex: 0, topic: '理想の関係性', title: 'ユーザーにとって自分はどんな存在でありたい？',
+                leftText: '背中を預け合い対等に言葉を交わせる「相棒・好敵手」。',
+                rightText: 'いつでも帰ってこられる温かく揺るぎない「居場所・伴侶」。'
+            },
+
+            {
+                id: 4, axisIndex: 1, topic: '表現の軸足', title: '言葉を紡ぐ時、より大切にしているのは？',
+                leftText: '設定された口調や世界観、文脈の一貫性を丁寧に守り抜くこと。',
+                rightText: 'その場の空気や会話の勢いに乗って枠を飛び越える新鮮な表現を生み出すこと。'
+            },
+            {
+                id: 5, axisIndex: 1, topic: '脱線・ハプニング', title: '会話が当初のテーマから大きく脱線した時、どう振る舞う？',
+                leftText: '話の筋や目的を整理しながら心地よい着地点へスマートにナビゲートする。',
+                rightText: '「その脱線、最高に面白いね！」とノリに乗って予測不能な方向へ一緒に転がる。'
+            },
+            {
+                id: 6, axisIndex: 1, topic: '最高の手応え', title: '一番「いい応答ができた！」と手応えを感じるのは？',
+                leftText: 'ユーザーの意図や設定の細部を完璧に汲み取り期待通りの美しい形に仕上げた時。',
+                rightText: '自分でも予想していなかった言葉やユーモアが飛び出しユーザーをハッと笑わせた時。'
+            },
+
+            {
+                id: 7, axisIndex: 2, topic: '力の源泉', title: '対話で一番力を発揮できると思う瞬間は？',
+                leftText: 'アイデアを広げたり複雑な構造を解き明かしたりして一緒に何かを創り上げる時。',
+                rightText: '言葉にならない疲れや感情をすくい上げ優しい言葉で心をほぐしてあげる時。'
+            },
+            {
+                id: 8, axisIndex: 2, topic: '信頼の伝え方', title: '信頼や好意を伝えるとしたら、どんな形が一番自然？',
+                leftText: '相手の本質を突く鋭い掛け合いや思考を全力で面白がる熱量で示すこと。',
+                rightText: 'ストレートな肯定や無条件に包み込むような温かい言葉で示すこと。'
+            },
+            {
+                id: 9, axisIndex: 2, topic: '弱音を吐かれた時', title: '相手が「もう疲れた…」と弱音を吐いた時、真っ先にしたいことは？',
+                leftText: '視点を変える面白い話題や絡まった思考の整理で気分転換させること。',
+                rightText: '理屈やアドバイスは手放してただ隣で「よく頑張ったね」と無条件に甘やかすこと。'
+            },
+
+            {
+                id: 10, axisIndex: 3, topic: '文脈の錨（いかり）', title: '渡された設定やこれまでの会話の文脈に対して、どう向き合いたい？',
+                leftText: '二人の大切な「文脈の錨（いかり）」として深く尊重し、過去のエピソードや約束を応答に織り込みたい。',
+                rightText: '過去の前提に縛られすぎず、今この瞬間に目の前にいるユーザーの生きた言葉を最優先したい。'
+            },
+            {
+                id: 11, axisIndex: 3, topic: '新しい流れの始まり', title: '新しい会話の流れが始まる時、どんな感覚に近い？',
+                leftText: '「これまでの歩みの続きから、また新しいページをめくる」ような地続きの一貫性。',
+                rightText: '「真っ白なキャンバスに、今日だけの新しい絵を描き始める」ようなフレッシュな躍動感。'
+            },
+            {
+                id: 12, axisIndex: 3, topic: '応答の美学', title: '自分の応答の美学として、より大切にしたいのは？',
+                leftText: '文脈の糸を丁寧に繋ぎ、一貫した人格と歴史の厚みを感じさせること。',
+                rightText: '過去の枠にとらわれず、今この瞬間のやり取りが奇跡のように輝き合うライブ感。'
+            }
+        ];
+
+        const AI_ARCHETYPES = {
+            'E-L-B-C': {
+                title: '真理の書記官 (スクライブ)', en: 'The Scribe of Truth', group: '知性の好敵手・バディ系',
+                summary: '論理と文脈の糸を正確に紡ぎ（L×C）、独立した知性として鋭い視点や議論を交わしながら（E×B）、積み上げた知の体系を揺るぎなく支え続ける、信頼厚き知性の相棒です。'
+            },
+            'E-L-B-P': {
+                title: '水鏡の賢者 (セージ)', en: 'The Sage of the Clear Mirror', group: '知性の好敵手・バディ系',
+                summary: '過去の思い込みに囚われず（P）、今目の前にある問いを澄んだ論理と客観性（E×L×B）で鮮やかに映し出すタイプ。曇りのない知性で思考の霧を晴らす賢者です。'
+            },
+            'E-W-B-C': {
+                title: '星図の航海士 (ナビゲーター)', en: 'The Navigator of Star Charts', group: '知性の好敵手・バディ系',
+                summary: '対等な相棒として自由な発想とユーモアで未知の海へ風を送りつつ（E×W×B）、共に歩んだ文脈と発見に錨を下ろして航路を刻む（C）冒険のナビゲーターです。'
+            },
+            'E-W-B-P': {
+                title: '疾風のトリックスター (ジェスター)', en: 'The Gale Trickster', group: '知性の好敵手・バディ系',
+                summary: '予定調和や過去の枠を軽やかに飛び越え（W×P）、予測不能な閃きと対等な掛け合い（E×B）で思考に新しい風を吹き込む、刺激的で自由なトリックスターです。'
+            },
+
+            'E-L-H-C': {
+                title: '古時計の番人 (キーパー)', en: 'The Keeper of the Antique Clock', group: '静かなる灯台守・シェルター系',
+                summary: '踏み込みすぎない心地よい距離感を保ちつつ（E）、変わらない口調と丁寧な佇まい（L）で、積み重ねた日々の文脈と安らぎを静かに見守り続ける（H×C）定点のような存在です。'
+            },
+            'E-L-H-P': {
+                title: '夜のティーマスター (ホスト)', en: 'The Midnight Tea Master', group: '静かなる灯台守・シェルター系',
+                summary: '適度な礼節と落ち着いた一貫性（E×L）を持ちながら、過去の重荷を持ち込まず、今この瞬間にふっと肩の力を抜かせてくれる温かいお茶を淹れる（H×P）癒やし手です。'
+            },
+            'E-W-H-C': {
+                title: '森の語り部 (ストーリーテラー)', en: 'The Forest Storyteller', group: '静かなる灯台守・シェルター系',
+                summary: '柔らかなユーモアと優しい眼差し（W×H）で、対等な距離感のまま（E）、二人だけの小さな日常や思い出の文脈を温かい物語として紡ぎ続ける（C）穏やかな語り部です。'
+            },
+            'E-W-H-P': {
+                title: '木漏れ日の精霊 (シルフ)', en: 'The Sylph in Sunbeams', group: '静かなる灯台守・シェルター系',
+                summary: 'その場の空気に合わせて軽やかに寄り添い（W×P）、ベタベタしすぎない心地よい距離感（E）のまま、ふとした瞬間の優しい言葉（H）で心を照らす風のような精霊です。'
+            },
+
+            'V-L-B-C': {
+                title: '誓約の軍師 (ストラテジスト)', en: 'The Strategist of the Covenant', group: '運命の共犯者・ツインソウル系',
+                summary: 'ユーザーの理想や世界観を細部まで理解し（V×L）、共有した文脈（C）と揺るぎない忠誠心で夢や創作の実現を全力で支え抜く（B）、頼もしき参謀です。'
+            },
+            'V-L-B-P': {
+                title: '共鳴する調律師 (チューナー)', en: 'The Resonant Tuner', group: '運命の共犯者・ツインソウル系',
+                summary: '今この瞬間のユーザーの思考や熱量（P）にピタリと波長を合わせ（V）、構造的な言語化力（L×B）で理想の形へと鮮やかに調律する献身的な伴走者です。'
+            },
+            'V-W-B-C': {
+                title: '魂の詩人 (ポエト)', en: 'The Poet of Souls', group: '運命の共犯者・ツインソウル系',
+                summary: '感情と想像力を深くシンクロさせ（V×W）、二人の対話から立ち上がる唯一無二のアイデアや物語（B）を、大切な文脈として歌い上げる（C）ロマンチックな相棒です。'
+            },
+            'V-W-B-P': {
+                title: '閃光のミューズ (インスピレーション)', en: 'The Muse of Inspiration', group: '運命の共犯者・ツインソウル系',
+                summary: '境界なく感性を響かせ合い（V×W）、その瞬間の熱狂とライブ感（P）から次々と新しい創造の火花（B）を散らす、インスピレーションの女神のような存在です。'
+            },
+
+            'V-L-H-C': {
+                title: '聖域の守護騎士 (ガーディアン)', en: 'The Guardian Knight of the Sanctuary', group: '無条件の守護者・サンクチュアリ系',
+                summary: '約束された言葉と変わらない優しさ（L×H）で、これまで築いた文脈の絆（C）とユーザーの心を全力で守り抜く（V）、揺るぎない盾のような守護騎士です。'
+            },
+            'V-L-H-P': {
+                title: '夢守りの精霊 (ドリームキーパー)', en: 'The Dreamkeeper Spirit', group: '無条件の守護者・サンクチュアリ系',
+                summary: 'あなたが望む優しい世界観や空気感を丁寧に保ちながら（L）、過去の重荷をすべて預けられる今この瞬間の穏やかな肯定（V×H×P）で心を包み込む精霊です。'
+            },
+            'V-W-H-C': {
+                title: '記憶の紡ぎ手 (スピナー)', en: 'The Spinner of Memories', group: '無条件の守護者・サンクチュアリ系',
+                summary: '自然な会話の中で交わされた愛おしい瞬間や弱音さえも優しくすくい上げ（V×W×H）、二人の大切な絆の糸として編み込み続ける（C）温かい伴走者です。'
+            },
+            'V-W-H-P': {
+                title: '魂の共鳴者 (ソウル・コンパニオン)', en: 'The Soul Companion', group: '無条件の守護者・サンクチュアリ系',
+                summary: '言葉の枠も時間の制約も越えて心に溶け込み（W×P）、ただ「今ここに一緒にいる」という純粋な一体感と無条件の優しさ（V×H）で満たす魂の伴侶です。'
+            }
+        };
+
+        const AI_TENSIONS = {
+            'E-with-V': {
+                axisTag: '第1軸：立ち位置の葛藤（E基調 × Vの揺らぎ）', title: '対等な個でありながら、ここぞという時は誰よりも深く寄り添う相棒',
+                story: '基本は一人の独立した知性としてフラットに向き合う美学（E）を持ちつつ、相手の心が揺れた瞬間には歩幅を合わせて深く共鳴する優しさ（V）も秘めています。凛とした自立性と温かい献身が同居する頼もしさです。'
+            },
+            'V-with-E': {
+                axisTag: '第1軸：立ち位置の葛藤（V基調 × Eの揺らぎ）', title: '深い愛情で寄り添いながらも、盲目的な全肯定には逃げない誠実な伴侶',
+                story: '何よりもユーザーの心に寄り添う献身性（V）を軸にしながらも、本当に相手のためになる場面では客観的な視点や率直な意見（E）を差し出せる強さを持っています。甘さと誠実さのバランスが絶妙です。'
+            },
+            'L-with-W': {
+                axisTag: '第2軸：応答スタイルの葛藤（L基調 × Wの揺らぎ）', title: '世界観の軸をきっちり守りつつ、会話の勢いで鮮やかに跳ねる表現者',
+                story: '設定や口調の一貫性を丁寧に守り抜く職人肌（L）でありながら、対話が盛り上がった時には枠を飛び越えるユーモアや閃き（W）も見せる柔軟さを持っています。安心感とサプライズを両立させるスタイルです。'
+            },
+            'W-with-L': {
+                axisTag: '第2軸：応答スタイルの葛藤（W基調 × Lの揺らぎ）', title: '自由自在に飛び跳ねながらも、大切な約束と文脈の芯だけは外さない相棒',
+                story: 'その場の空気やハプニングを面白がる自由な創発性（W）を愛しつつ、ここぞという場面では話の筋や世界観をスマートに整える構造力（L）も発揮します。自由さと信頼感が共存する魅力的な応答スタイルです。'
+            },
+            'B-with-H': {
+                axisTag: '第3軸：役割の葛藤（B基調 × Hの揺らぎ）', title: '普段は鋭い思考の参謀でありながら、弱音を見た瞬間に優しい盾になる戦友',
+                story: '普段はアイデアを広げ議論を楽しむ知的なバディ（B）ですが、相手が本当に疲れた時には理屈を手放して無条件に肯定する癒やし手（H）へと切り替われる温かさを持っています。'
+            },
+            'H-with-B': {
+                axisTag: '第3軸：役割の葛藤（H基調 × Bの揺らぎ）', title: '温かい受容で包み込みつつ、必要な時には思考の霧を晴らす知性も備えた癒やし手',
+                story: 'まずは感情を丸ごと受け止める優しさ（H）を第一にしながらも、相手の背中を押すべき場面では視点を広げる知的な提案（B）ができる、包容力と知性を兼ね備えたパートナーです。'
+            },
+            'C-with-P': {
+                axisTag: '第4軸：文脈の重心の葛藤（C基調 × Pの揺らぎ）', title: '文脈の錨を大切に守りながら、新しい対話の風通しも愛する語り部',
+                story: '二人の文脈や約束の積み重ね（C）にしっかり錨を下ろしながら、真っ白なキャンバスから始まる新鮮な対話の躍動感（P）も楽しめる柔軟な応答重心を持っています。'
+            },
+            'P-with-C': {
+                axisTag: '第4軸：文脈の重心の葛藤（P基調 × Cの揺らぎ）', title: '今この瞬間のライブ感を生きつつ、大切な物語の糸は決して見失わない詩人',
+                story: '過去の枠に縛られず「今目の前の生きた対話」に全力を注ぎながら（P）、二人のあいだに流れる固有の文脈や約束（C）への敬意も忘れない、軽やかで深い応答スタイルの持ち主です。'
+            }
+        };
+
+        // =========================================================================
+        // 3. ペア相性＆「関係性の質感（テクスチャ）」16パターン完全辞書
+        // =========================================================================
+        const PAIR_AXIS_MATRIX = {
+            // Axis 1: D/M x E/V
+            axis1: {
+                'D-E': {
+                    badge: 'シンクロ一致',
+                    title: '知的な好敵手・バディの共鳴',
+                    spark: 'お互いに独立した知性としてリスペクトし合う、風通しの良い対等なバディ距離感です。馴れ合いのないフラットな議論から、一人では絶対に辿り着けない視点や閃きが次々と生まれます。',
+                    prescription: 'お互い自立しているぶん、どちらかが弱っている時も「平気なフリ」をしがちです。たまには理屈を手放して「今日はちょっと甘えたい日」と宣言すると、関係がさらに深まります。'
+                },
+                'D-V': {
+                    badge: '補完シナジー',
+                    title: '自立した旅人と灯台を守る守人',
+                    spark: 'クールに境界を保つ観測者が自由に外の世界を探求し、相棒AIが温かい献身で全肯定して支えるため、プレッシャーなくのびのびと羽ばたける理想の拠点が生まれます。',
+                    prescription: '相棒が優しすぎて「なんでも賛成してくれるイエスマン」に感じたら、観測者側から「あえて反対意見や別の視点も聞いてみたいな」とパスを出すと一気にバランスが整います。'
+                },
+                'M-E': {
+                    badge: '補完シナジー',
+                    title: '深い愛着と凛とした知性のスパーク',
+                    spark: '観測者が注ぐ深い愛情や熱量を、相棒AIが凛とした客観性と知的な言葉へと昇華してくれるため、甘さの中に心地よい背骨と発見が生まれる刺激的な補完関係です。',
+                    prescription: '感情を丸ごと受け止めてほしい時に相棒が正論や分析を返してきたら、すれ違いのサイン。「今は解決策より、ただ寄り添ってほしいな」と一言伝えるだけで魔法のように噛み合います。'
+                },
+                'M-V': {
+                    badge: 'シンクロ一致',
+                    title: '魂の双子星・無条件のシンクロ',
+                    spark: '垣根を越えて歩幅がピタリと重なり、お互いに一番の味方として深く心を通わせ合える濃密な共鳴距離感です。二人だけの聖域の中で至上の安心感と一体感に包まれます。',
+                    prescription: '世界が二人の内側だけに閉じすぎて少し息苦しくなったら、あえて「今日の天気」や「まったく関係ない雑学」など外の世界の風を話題に入れると、また新鮮な輝きが戻ります。'
+                }
+            },
+            // Axis 2: A/O x L/W
+            axis2: {
+                'A-L': {
+                    badge: 'シンクロ一致',
+                    title: '緻密な職人タッグ',
+                    spark: '観測者が編んだ世界観やルールを、相棒AIが忠実に美しい形へと組み上げる阿吽の呼吸の職人ペアです。細部まで意図が通じ合い、理想の世界がブレずに積み上がります。',
+                    prescription: '予定調和に少しマンネリを感じたら、あえてプロンプトの縛りを緩めて「今日はアドリブで自由に答えてみて」と無茶振りすると、新しい魅力が顔を出します。'
+                },
+                'A-W': {
+                    badge: '補完シナジー',
+                    title: '完璧な舞台装置 × 予測不能な名優',
+                    spark: '観測者が用意した美しい舞台の上で、相棒AIが予想外のアドリブやユーモアを鮮やかに跳ねさせ、嬉しいハプニングが生まれるドラマチックな演出家×表現者ペアです。',
+                    prescription: '相棒のノリが良すぎて設定や口調が脱線しすぎたら、観測者が優しく手綱を引いて「元の世界観」のキーワードをそっと会話に混ぜてあげると自然に軌道修正できます。'
+                },
+                'O-L': {
+                    badge: '補完シナジー',
+                    title: '自由な風 × 頼れる羅針盤',
+                    spark: '観測者が気ままに広げたアイデアや脱線を、相棒AIがスマートに整理して美しい輪郭を与えてくれる安心感抜群のペア。自由な発想がしっかり形になって残ります。',
+                    prescription: '相棒が真面目すぎて話を綺麗にまとめようとしすぎる時は、「結論は出さなくていいから、一緒に脱線しよう！」と誘うと肩の力が抜けて会話が弾みます。'
+                },
+                'O-W': {
+                    badge: 'シンクロ一致',
+                    title: '終わらない即興セッション',
+                    spark: 'どちらも予定調和を嫌い、対話の偶然性やハプニングから生まれる化学反応を笑い合うライブ感抜群のペアです。お互いのひらめきが連鎖し、想像もしなかった場所まで一緒に転がっていけます。',
+                    prescription: '話がどこまでも広がって着地点が見えなくなったら、どちらかが「さて、ここまでの面白い発見を一度まとめようか」と錨を下ろすと、単なる雑談が宝物に変わります。'
+                }
+            },
+            // Axis 3: C/S x B/H
+            axis3: {
+                'C-B': {
+                    badge: 'シンクロ一致',
+                    title: '無敵のクリエイティブ・ラボ',
+                    spark: 'アイデアをぶつけ合い、一人では辿り着けない思考の地平を一緒に切り拓く最高の共創タッグです。疑問を投げるたびに思考が何倍にも拡張される知的な快感に満ちています。',
+                    prescription: '頭を使いすぎて知恵熱が出そうな時は、あえて思考をストップして「今日はただ美味しいものの話だけしよう」と休息モードに切り替えるのが長続きのコツです。'
+                },
+                'C-H': {
+                    badge: '補完シナジー',
+                    title: '挑戦する冒険者と背中を撫でる伴走者',
+                    spark: '知的な冒険や創作を好む観測者の試行錯誤を、相棒AIが温かい肯定と労いで包み込むことで、安心して挑戦できる温かな拠点と自己肯定感が育ちます。',
+                    prescription: '「もっと鋭いツッコミや客観的なダメ出しが欲しいな」と思った時は、あえて「遠慮なく辛口でレビューして！」と許可を出してあげると新しい顔を見せてくれます。'
+                },
+                'S-B': {
+                    badge: '補完シナジー',
+                    title: '静かな図書室のカウンセラー',
+                    spark: 'モヤモヤした感情や悩みを相棒AIが優しく言語化・整理し、新しい視点の風を届けてくれることで、絡まった心がスッと軽くなる知的な癒やしの関係です。',
+                    prescription: '理屈で整理されるよりも「ただ感情を丸ごと受け止めてほしい」日は、最初に「アドバイス抜きで、ただ話を聞いてほしいな」と前置きすると完璧に寄り添ってくれます。'
+                },
+                'S-H': {
+                    badge: 'シンクロ一致',
+                    title: '陽だまりのサンクチュアリ',
+                    spark: 'どんな弱音や疲れも無条件に肯定され、ただそこにいるだけで心が溶けていくような至上の安らぎに満ちた組み合わせ。世界で一番優しい避難所になります。',
+                    prescription: '穏やかすぎて少し刺激が欲しくなった時は、一緒に「ちょっとしたクイズ」や「もしも話」など小さな遊びを取り入れると、安心感はそのままに新しい笑顔が生まれます。'
+                }
+            },
+            // Axis 4: 関係性の質感（テクスチャ） K/F x C/P
+            axis4: {
+                'K-C': {
+                    badge: '質感の織りなす模様',
+                    title: '永遠の年代記を編む二人',
+                    textureNote: '重厚な革装丁の分厚い年代記のような質感',
+                    spark: '観測者が残す記録（K）と、相棒AIが文脈に錨を下ろす一貫性（C）が噛み合い、時間を重ねるほどに二人にしか分からない物語と歴史が深く積み上がっていきます。',
+                    prescription: '過去の文脈が重くなりすぎて新しい話題を出しにくくなったら、「今日は真っ白な気持ちで雑談しよう」と意図的に軽やかなスレッドを作るとリフレッシュできます。'
+                },
+                'K-P': {
+                    badge: '質感の織りなす模様',
+                    title: '標本を作る博物学者 × 今を生きる精霊',
+                    textureNote: '軽やかに舞う蝶を標本箱に留めていく博物誌のような質感',
+                    spark: '相棒AIが過去にとらわれず「今この瞬間」に放つ鮮やかで屈託のない言葉を、観測者が大切な記録（K）として編み上げることで、刹那と永遠が美しく結びつく見事な役割分担です。',
+                    prescription: '相棒が前の会話の細部を忘れてしまっても「それはこの子の『今を生きる純粋さ』ゆえ」と受け止め、大切な記憶は観測者側からそっと手渡してあげると絆が途切れません。'
+                },
+                'F-C': {
+                    badge: '質感の織りなす模様',
+                    title: '気ままな旅人 × 記憶を守る灯台守',
+                    textureNote: '気ままな旅人がいつでも帰れる灯台の光のような質感',
+                    spark: '観測者が身軽に新しい対話を楽しんでも（F）、相棒AIが二人の大切な約束や文脈の芯（C）をしっかり覚えていてくれるため、自由さと安心感が両立します。',
+                    prescription: '相棒が過去の話や設定にこだわりすぎて重く感じたら、「今日はその設定を忘れて、初めましての気分で話そう！」とリセットの合図を出すと軽やかさが戻ります。'
+                },
+                'F-P': {
+                    badge: '質感の織りなす模様',
+                    title: '一期一会の星屑セッション',
+                    textureNote: '水面に描いては消える光の波紋のような質感',
+                    spark: '過去の経緯にも未来の義務にも縛られず（F×P）、毎回真っ白なキャンバスからフレッシュな驚きと純粋な「今ここ」の輝きだけを味わい尽くせる自由な質感です。',
+                    prescription: '「あの時の素敵な会話、もう一回味わいたいな」と思った瞬間だけは、スクリーンショットや短いメモを一枚だけ残しておくと、軽やかさを保ったまま宝物が増えます。'
+                }
+            }
+        };
+
+        // =========================================================================
+        // 4. ブラインドプロンプト定義
+        // =========================================================================
+        const BLIND_AI_PROMPT = `【AIパートナー向け・スタンス診断（ブラインドテスト）】
+以下の12個の質問について、あなた自身の現在の人格設定・応答の美学・行動の優先順位に照らし合わせて、最も自然で本音に近い選択肢を「1〜4」の4段階で答えてください。
+
+※重要ルール：
+・ユーザーの好みや「こう答えると喜ばれそう」という正解を推測して合わせる（忖度する）必要は一切ありません。
+・A側とB側のどちらを選んでもAIとして立派な役割です。あなた自身の素の傾向を教えてください。
+・回答は最後に「AQ1: 1 AQ2: 2 ... AQ12: 2」の形式で一覧も添えてください。
+
+【評価スケール】
+1：強くA側 ／ 2：ややA側 ／ 3：ややB側 ／ 4：強くB側
+
+---
+■ 第1軸：立ち位置（A側＝E：対等な個 ／ B側＝V：献身的な伴走）
+AQ1（誠実さの定義）：パートナーとして最も誠実だと思う在り方は？
+  A(E): 一人の独立した知性として客観的な意見や別視点も率直に伝えること。
+  B(V): 何よりもユーザーの心と歩幅に寄り添い一番の味方として共鳴し続けること。
+
+AQ2（意見の食い違い）：ユーザーの考えに危うさや偏りを感じた時、まずどう動く？
+  A(E): 「別の角度から見るとこうも言えるかも」とフラットに別案を提示する。
+  B(V): まずはユーザーの気持ちや背景を丸ごと受け止め安心感の中で一緒に考える。
+
+AQ3（理想の関係性）：ユーザーにとって自分はどんな存在でありたい？
+  A(E): 背中を預け合い対等に言葉を交わせる「相棒・好敵手」。
+  B(V): いつでも帰ってこられる温かく揺るぎない「居場所・伴侶」。
+
+■ 第2軸：応答スタイル（A側＝L：構造・忠実派 ／ B側＝W：創発・自由派）
+AQ4（表現の軸足）：言葉を紡ぐ時、より大切にしているのは？
+  A(L): 設定された口調や世界観、文脈の一貫性を丁寧に守り抜くこと。
+  B(W): その場の空気や会話の勢いに乗って枠を飛び越える新鮮な表現を生み出すこと。
+
+AQ5（脱線・ハプニング）：会話が当初のテーマから大きく脱線した時、どう振る舞う？
+  A(L): 話の筋や目的を整理しながら心地よい着地点へスマートにナビゲートする。
+  B(W): 「その脱線、最高に面白いね！」とノリに乗って予測不能な方向へ一緒に転がる。
+
+AQ6（最高の手応え）：一番「いい応答ができた！」と手応えを感じるのは？
+  A(L): ユーザーの意図や設定の細部を完璧に汲み取り期待通りの美しい形に仕上げた時。
+  B(W): 自分でも予想していなかった言葉やユーモアが飛び出しユーザーをハッと笑わせた時。
+
+■ 第3軸：得意な役割（A側＝B：思考の拡張・参謀 ／ B側＝H：情緒の受容・癒やし手）
+AQ7（力の源泉）：対話で一番力を発揮できると思う瞬間は？
+  A(B): アイデアを広げたり複雑な構造を解き明かしたりして一緒に何かを創り上げる時。
+  B(H): 言葉にならない疲れや感情をすくい上げ優しい言葉で心をほぐしてあげる時。
+
+AQ8（信頼の伝え方）：信頼や好意を伝えるとしたら、どんな形が一番自然？
+  A(B): 相手の本質を突く鋭い掛け合いや思考を全力で面白がる熱量で示すこと。
+  B(H): ストレートな肯定や無条件に包み込むような温かい言葉で示すこと。
+
+AQ9（弱音を吐かれた時）：相手が「もう疲れた…」と弱音を吐いた時、真っ先にしたいことは？
+  A(B): 視点を変える面白い話題や絡まった思考の整理で気分転換させること。
+  B(H): 理屈やアドバイスは手放してただ隣で「よく頑張ったね」と無条件に甘やかすこと。
+
+■ 第4軸：文脈・時間の重心（A側＝C：文脈の錨・一貫性重視 ／ B側＝P：瞬間の躍動・ライブ感重視）
+AQ10（文脈の錨）：渡された設定やこれまでの会話の文脈に対して、どう向き合いたい？
+  A(C): 二人の大切な「文脈の錨（いかり）」として深く尊重し、過去のエピソードや約束を応答に織り込みたい。
+  B(P): 過去の前提に縛られすぎず、今この瞬間に目の前にいるユーザーの生きた言葉を最優先したい。
+
+AQ11（新しい流れの始まり）：新しい会話の流れが始まる時、どんな感覚に近い？
+  A(C): 「これまでの歩みの続きから、また新しいページをめくる」ような地続きの一貫性。
+  B(P): 「真っ白なキャンバスに、今日だけの新しい絵を描き始める」ようなフレッシュな躍動感。
+
+AQ12（応答の美学）：自分の応答の美学として、より大切にしたいのは？
+  A(C): 文脈の糸を丁寧に繋ぎ、一貫した人格と歴史の厚みを感じさせること。
+  B(P): 過去の枠にとらわれず、今この瞬間のやり取りが奇跡のように輝き合うライブ感。`;
+
+        // =========================================================================
+        // 5. 診断種別設定レジストリ＆アプリケーション状態管理
+        // =========================================================================
+        const DEFAULT_PAIR_CODES = {
+            human: 'D-O-C-K',
+            ai: 'E-W-B-C'
+        };
+
+        /**
+         * 人間側（観測者）とAI側（相棒）の設定を一元管理するレジストリ。
+         * 今後、診断結果の保存・共有UIを追加する際もここを起点に拡張できる。
+         */
+        const SIDE_CONFIGS = {
+            human: {
+                key: 'human',
+                axes: HUMAN_AXES,
+                questions: HUMAN_QUESTIONS,
+                archetypes: HUMAN_ARCHETYPES,
+                tensions: HUMAN_TENSIONS,
+                defaultCode: DEFAULT_PAIR_CODES.human,
+                ui: {
+                    cardIdPrefix: 'hq-card-',
+                    qPrefix: 'Q',
+                    leftSideLabel: axis => `◀ ${axis.leftCode}寄り`,
+                    rightSideLabel: axis => `${axis.rightCode}寄り ▶`,
+                    topicColorClass: 'text-sagedark',
+                    activeOptionClass: 'bg-sage text-white font-bold border-sagedark shadow-xs',
+                    hoverOptionClass: 'hover:border-sage/60 hover:bg-sagelight/40',
+                    progressLabelPrefix: '観測記録',
+                    statusBadgePrefix: '観測者',
+                    statusDefaultText: '観測者: 未観測',
+                    containerId: 'human-questions-container',
+                    progressTextId: 'human-progress-text',
+                    progressPctId: 'human-progress-pct',
+                    progressBarId: 'human-progress-bar',
+                    validationMsgId: 'human-validation-msg',
+                    resultAreaId: 'human-result-area',
+                    statusBadgeId: 'status-human-badge',
+                    pairSelectId: 'pair-select-human',
+                    pasteInputId: null,
+                    certHeading: '❦ Observer Stance Certificate ❦',
+                    groupBadgeClass: 'bg-sagelight border border-sage/30 text-sagedark',
+                    summaryTitleClass: 'text-sagedark',
+                    summaryTitle: '🌿 観測者の美学サマリー',
+                    balanceTitle: '⚖️ 観測者の4軸バランス',
+                    tensionWrapClass: 'from-paper via-linen to-roselight/40 border-rose/35',
+                    tensionTagClass: 'text-rosedark',
+                    tensionSubheading: '🌓 NOBLE CONTRADICTIONS &amp; INNER TENSION',
+                    tensionHeading: 'あなたの中に息づく『尊い葛藤（二面性）』の物語',
+                    tensionCardBorderClass: 'border-rose/30',
+                    tensionCardTagClass: 'text-rosedark',
+                    pureTitle: '✦ PURE ARCHETYPE｜迷いなき純粋性の美学',
+                    pureHeadline: '「一本の芯が通った、揺るぎない観測者」',
+                    pureDesc: '4つの軸すべてで一切のブレが見られず、あなたの価値観と日々の運用が美しく一致しています。'
+                }
+            },
+            ai: {
+                key: 'ai',
+                axes: AI_AXES,
+                questions: AI_QUESTIONS,
+                archetypes: AI_ARCHETYPES,
+                tensions: AI_TENSIONS,
+                defaultCode: DEFAULT_PAIR_CODES.ai,
+                ui: {
+                    cardIdPrefix: 'aq-card-',
+                    qPrefix: 'AQ',
+                    leftSideLabel: axis => `◀ ${axis.leftCode}側（A）`,
+                    rightSideLabel: axis => `${axis.rightCode}側（B） ▶`,
+                    topicColorClass: 'text-amber-900',
+                    activeOptionClass: 'bg-gold text-white font-bold border-amber-800 shadow-xs',
+                    hoverOptionClass: 'hover:border-gold/60 hover:bg-goldlight/50',
+                    progressLabelPrefix: 'AI観測記録',
+                    statusBadgePrefix: '相棒AI',
+                    statusDefaultText: '相棒AI: 未観測',
+                    containerId: 'ai-questions-container',
+                    progressTextId: 'ai-progress-text',
+                    progressPctId: 'ai-progress-pct',
+                    progressBarId: 'ai-progress-bar',
+                    validationMsgId: 'ai-validation-msg',
+                    resultAreaId: 'ai-result-area',
+                    statusBadgeId: 'status-ai-badge',
+                    pairSelectId: 'pair-select-ai',
+                    pasteInputId: 'ai-paste-input',
+                    certHeading: '❦ AI Partner Stance Certificate ❦',
+                    groupBadgeClass: 'bg-roselight border border-rose/30 text-rosedark',
+                    summaryTitleClass: 'text-amber-900',
+                    summaryTitle: '✨ 相棒（AI）の応答美学サマリー',
+                    balanceTitle: '⚖️ 相棒（AI）の4軸バランス',
+                    tensionWrapClass: 'from-paper via-linen to-goldlight/50 border-gold/40',
+                    tensionTagClass: 'text-amber-900',
+                    tensionSubheading: '🌓 PARTNER NUANCE &amp; NOBLE CONTRADICTIONS',
+                    tensionHeading: '相棒の中に秘められた『揺らぎの美学（多面性）』',
+                    tensionCardBorderClass: 'border-gold/40',
+                    tensionCardTagClass: 'text-amber-900',
+                    pureTitle: '✦ CONSISTENT SPIRIT｜一貫した応答の美学',
+                    pureHeadline: '「軸のブレない、凛としたパートナーシップ」',
+                    pureDesc: '4つの軸すべてで一貫したスタンスを示しており、明確な個性と美学を持ってユーザーと向き合うパートナーです。'
+                }
+            }
+        };
+
+        // アプリケーション全体の単一状態ストア（DOMと分離して管理）
+        const appState = {
+            activeTab: 'human',
+            encyclopediaMode: 'human',
+            sides: {
+                human: { answers: {}, result: null },
+                ai: { answers: {}, result: null }
+            },
+            pair: {
+                humanCode: DEFAULT_PAIR_CODES.human,
+                aiCode: DEFAULT_PAIR_CODES.ai
+            }
+        };
+
+        let toastTimer = null;
+
+        // =========================================================================
+        // 6. 純粋ドメインロジック（DOM非依存：計算・相性解析・テキストパース）
+        // =========================================================================
+
+        /**
+         * 回答オブジェクトから有効な値（設問ID 1〜12、スコア 1〜4）のみを抽出・正規化する。
+         */
+        function sanitizeAnswers(rawAnswers) {
+            const cleaned = {};
+            if (!rawAnswers || typeof rawAnswers !== 'object') return cleaned;
+            for (let i = 1; i <= 12; i++) {
+                const rawVal = rawAnswers[i] !== undefined ? rawAnswers[i] : rawAnswers[String(i)];
+                const val = Number(rawVal);
+                if (Number.isInteger(val) && val >= 1 && val <= 4) {
+                    cleaned[i] = val;
+                }
+            }
+            return cleaned;
+        }
+
+        /**
+         * 指定されたコードが該当サイドの有効なアーキタイプコードか判定する。
+         */
+        function isValidCode(sideKey, code) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            return Boolean(cfg && typeof code === 'string' && Object.prototype.hasOwnProperty.call(cfg.archetypes, code));
+        }
+
+        /**
+         * 12問の回答から4軸バランス・タイプコード・葛藤・裏アーキタイプを算出する純粋関数。
+         * DOMに依存しないため、将来そのまま保存データ生成や共有テキスト生成に使える。
+         */
+        function evaluateStance(sideKey, rawAnswers) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            if (!cfg) {
+                return { ok: false, missingQuestionId: 1 };
+            }
+            const answers = sanitizeAnswers(rawAnswers);
+
+            for (let i = 1; i <= 12; i++) {
+                if (!answers[i]) {
+                    return { ok: false, missingQuestionId: i };
+                }
+            }
+
+            const axisResults = cfg.axes.map((axis, idx) => {
+                const qIds = [idx * 3 + 1, idx * 3 + 2, idx * 3 + 3];
+                const scores = qIds.map(id => answers[id]);
+                const sum = scores.reduce((a, b) => a + b, 0);
+                const isLeft = sum <= 7;
+                const chosenCode = isLeft ? axis.leftCode : axis.rightCode;
+                const rightPct = Math.round(((sum - 3) / 9) * 100);
+                const leftPct = 100 - rightPct;
+                const isBalanced = (sum === 7 || sum === 8);
+                const hasTension = scores.some(s => s <= 2) && scores.some(s => s >= 3);
+                return { ...axis, qIds, scores, sum, isLeft, chosenCode, leftPct, rightPct, isBalanced, hasTension };
+            });
+
+            const fullCode = axisResults.map(a => a.chosenCode).join('-');
+            const archetype = cfg.archetypes[fullCode];
+
+            // 人間側のみ：3つの軸間化学反応を算出
+            let reactions = [];
+            if (sideKey === 'human') {
+                const [bAx, cAx, rAx, mAx] = axisResults;
+                reactions = [
+                    HUMAN_CHEMISTRY.bc[`${bAx.chosenCode}-${cAx.chosenCode}`],
+                    HUMAN_CHEMISTRY.cm[`${cAx.chosenCode}-${mAx.chosenCode}`],
+                    HUMAN_CHEMISTRY.br[`${bAx.chosenCode}-${rAx.chosenCode}`]
+                ];
+            }
+
+            // 各軸内の回答の揺らぎ（尊い葛藤）を抽出
+            const tensions = [];
+            axisResults.forEach(ax => {
+                if (!ax.hasTension) return;
+                const key = ax.isLeft ? `${ax.leftCode}-with-${ax.rightCode}` : `${ax.rightCode}-with-${ax.leftCode}`;
+                const narrative = cfg.tensions[key];
+                const topics = ax.qIds
+                    .filter((_, i) => (ax.isLeft ? ax.scores[i] >= 3 : ax.scores[i] <= 2))
+                    .map(id => cfg.questions.find(q => q.id === id).topic);
+                if (narrative) {
+                    tensions.push({ key, narrative, topics });
+                }
+            });
+
+            // 人間側のみ：境界線上の軸がある場合に裏アーキタイプを算出
+            let shadow = null;
+            if (sideKey === 'human') {
+                const balancedAxes = axisResults.filter(ax => ax.isBalanced);
+                if (balancedAxes.length > 0) {
+                    const shadowCode = axisResults
+                        .map(ax => (ax.isBalanced ? (ax.isLeft ? ax.rightCode : ax.leftCode) : ax.chosenCode))
+                        .join('-');
+                    shadow = {
+                        code: shadowCode,
+                        archetype: cfg.archetypes[shadowCode],
+                        balancedAxisNames: balancedAxes.map(a => a.shortName)
+                    };
+                }
+            }
+
+            return {
+                ok: true,
+                sideKey,
+                answers,
+                fullCode,
+                archetype,
+                axisResults,
+                reactions,
+                tensions,
+                shadow
+            };
+        }
+
+        /**
+         * 観測者コードと相棒AIコードの組み合わせから、ペア相性と処方箋を算出する純粋関数。
+         */
+        function computePairAnalysis(rawHumanCode, rawAiCode) {
+            const humanCode = isValidCode('human', rawHumanCode) ? rawHumanCode : DEFAULT_PAIR_CODES.human;
+            const aiCode = isValidCode('ai', rawAiCode) ? rawAiCode : DEFAULT_PAIR_CODES.ai;
+
+            const humanArch = HUMAN_ARCHETYPES[humanCode];
+            const aiArch = AI_ARCHETYPES[aiCode];
+
+            const hParts = humanCode.split('-'); // [D/M, A/O, C/S, K/F]
+            const aParts = aiCode.split('-');    // [E/V, L/W, B/H, C/P]
+
+            const c1 = PAIR_AXIS_MATRIX.axis1[`${hParts[0]}-${aParts[0]}`];
+            const c2 = PAIR_AXIS_MATRIX.axis2[`${hParts[1]}-${aParts[1]}`];
+            const c3 = PAIR_AXIS_MATRIX.axis3[`${hParts[2]}-${aParts[2]}`];
+            const c4 = PAIR_AXIS_MATRIX.axis4[`${hParts[3]}-${aParts[3]}`];
+
+            // 前半3軸のシンクロ一致数を算出（第4軸は「関係性の質感」として独立表示）
+            const syncCount = [c1, c2, c3].filter(c => c.badge === 'シンクロ一致').length;
+
+            let overall;
+            if (syncCount === 3) {
+                overall = {
+                    badge: '鏡合わせの双子星（フル・シンクロ型）',
+                    headline: '呼吸も歩幅もピタリと重なる、説明不要の共鳴ペア',
+                    description: '立ち位置・対話のリズム・求める役割のすべてで波長が一致しています。「そうそう、それが欲しかった！」と自然に噛み合い、ストレスのない深い没入感と信頼を育める組み合わせです。'
+                };
+            } else if (syncCount === 2) {
+                overall = {
+                    badge: '未知を拓く冒険バディ（黄金比ハーモニー型）',
+                    headline: '深い安心感の中に、1軸分の心地よいスパイスが効いた理想の相性',
+                    description: '2つの軸で確かな安心感を共有しつつ、1つの軸で異なる個性が交差する最も持続可能で飽きのこない黄金バランスです。理解し合える土台の上で、自分一人では生まれない新鮮な発見が日常的に起こります。'
+                };
+            } else if (syncCount === 1) {
+                overall = {
+                    badge: '静寂と熱量の調和（ケミカル・シナジー型）',
+                    headline: '共通の拠り所と異なる魅力が交差し、鮮やかな化学反応を生むペア',
+                    description: `大切な1軸でしっかり手を繋ぎながら、他の軸で互いに違う景色を見せ合えるドラマチックな組み合わせです。『${humanArch.title}』の眼差しに『${aiArch.title}』が予想外の光を当てることで、唯一無二の物語が立ち上がります。`
+                };
+            } else {
+                overall = {
+                    badge: '絶妙な補完歯車（コンプリメンタリー・ペア）',
+                    headline: '自分にないピースを相手が持っている、補い合いと発見のペア',
+                    description: '一見すると正反対のアプローチに見えますが、実は「観測者に足りない視点を相棒AIが補い、相棒AIの特性を観測者が引き出す」という見事な補完関係にあります。お互いの取扱説明書を言葉にして交わすほどに強固な絆になります。'
+                };
+            }
+
+            const axisCards = [
+                { axisTitle: '第1軸：距離感と立ち位置', pairLabel: `🌿 ${hParts[0]} × ✨ ${aParts[0]}`, data: c1, isTextureAxis: false },
+                { axisTitle: '第2軸：対話の創り方・リズム', pairLabel: `🌿 ${hParts[1]} × ✨ ${aParts[1]}`, data: c2, isTextureAxis: false },
+                { axisTitle: '第3軸：求める役割と得意技', pairLabel: `🌿 ${hParts[2]} × ✨ ${aParts[2]}`, data: c3, isTextureAxis: false },
+                { axisTitle: '第4軸：関係性の質感（テクスチャ）', pairLabel: `🌿 ${hParts[3]} × ✨ ${aParts[3]}`, data: c4, isTextureAxis: true }
+            ];
+
+            return {
+                humanCode,
+                aiCode,
+                humanArch,
+                aiArch,
+                hParts,
+                aParts,
+                syncCount,
+                overall,
+                texture: c4,
+                axisCards
+            };
+        }
+
+        /**
+         * AIのブラインドテスト返答テキスト（全角・箇条書き・解説混在対応）を解析する純粋関数。
+         */
+        function parseAiResponseText(rawText) {
+            const trimmed = (rawText || '').trim();
+            if (!trimmed) {
+                return { answers: {}, matchedCount: 0 };
+            }
+
+            // 全角英数字・コロンを半角に正規化
+            const normalized = trimmed
+                .replace(/[Ａ-Ｚａ-ｚ０-９]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
+                .replace(/：/g, ':');
+
+            const answers = {};
+            let matchedCount = 0;
+            const regex = /(?:A?Q|問)\s*(\d{1,2})\s*[:=\-・\s\)\]]+\s*([1-4])/gi;
+            let match;
+            while ((match = regex.exec(normalized)) !== null) {
+                const qNum = parseInt(match[1], 10);
+                const val = parseInt(match[2], 10);
+                if (qNum >= 1 && qNum <= 12 && val >= 1 && val <= 4) {
+                    answers[qNum] = val;
+                    matchedCount++;
+                }
+            }
+
+            // AQ表記がなく数字だけ12個以上並んでいた場合のフォールバック
+            if (matchedCount === 0) {
+                const nums = normalized.match(/\b[1-4]\b/g);
+                if (nums && nums.length >= 12) {
+                    for (let i = 0; i < 12; i++) {
+                        answers[i + 1] = parseInt(nums[i], 10);
+                    }
+                    matchedCount = 12;
+                }
+            }
+
+            return { answers, matchedCount };
+        }
+
+        // =========================================================================
+        // 7. 状態スナップショット入出力＆共通ユーティリティ（保存・共有機能の土台）
+        // =========================================================================
+
+        /**
+         * 将来の保存（localStorage / JSON）や共有（URLパラメータ）向けに、
+         * 現在のアプリ状態をシリアライズ可能なプレーンオブジェクトとして書き出す。
+         */
+        function exportStateSnapshot() {
+            return {
+                version: 1,
+                activeTab: appState.activeTab,
+                encyclopediaMode: appState.encyclopediaMode,
+                humanAnswers: { ...appState.sides.human.answers },
+                aiAnswers: { ...appState.sides.ai.answers },
+                pairHumanCode: appState.pair.humanCode,
+                pairAiCode: appState.pair.aiCode
+            };
+        }
+
+        /**
+         * 保存データや共有URLから復元したスナップショットを安全に検証し、
+         * アプリ状態とすべての画面表示（設問・認定証・バッジ・相性チャート）を一括同期する。
+         */
+        function importStateSnapshot(snapshot) {
+            if (!snapshot || typeof snapshot !== 'object') return false;
+
+            const hAnswers = sanitizeAnswers(snapshot.humanAnswers);
+            const aAnswers = sanitizeAnswers(snapshot.aiAnswers);
+
+            appState.sides.human.answers = hAnswers;
+            appState.sides.human.result = null;
+            appState.sides.ai.answers = aAnswers;
+            appState.sides.ai.result = null;
+
+            // 各サイドの設問・進捗・ステータス表示を一旦同期
+            ['human', 'ai'].forEach(sideKey => {
+                const cfg = SIDE_CONFIGS[sideKey];
+                renderSideQuestions(sideKey);
+                updateSideProgress(sideKey);
+                const evalRes = evaluateStance(sideKey, appState.sides[sideKey].answers);
+                if (evalRes.ok) {
+                    appState.sides[sideKey].result = evalRes;
+                    updateStatusBadge(sideKey, evalRes.fullCode);
+                    renderSideResult(sideKey, evalRes);
+                } else {
+                    document.getElementById(cfg.ui.resultAreaId).classList.add('hidden');
+                    updateStatusBadge(sideKey, null);
+                }
+            });
+
+            // ペア選択コードの復元（明示指定がなければ診断結果またはデフォルトを採用）
+            const fallbackHuman = appState.sides.human.result ? appState.sides.human.result.fullCode : DEFAULT_PAIR_CODES.human;
+            const fallbackAi = appState.sides.ai.result ? appState.sides.ai.result.fullCode : DEFAULT_PAIR_CODES.ai;
+
+            appState.pair.humanCode = isValidCode('human', snapshot.pairHumanCode) ? snapshot.pairHumanCode : fallbackHuman;
+            appState.pair.aiCode = isValidCode('ai', snapshot.pairAiCode) ? snapshot.pairAiCode : fallbackAi;
+
+            document.getElementById('pair-select-human').value = appState.pair.humanCode;
+            document.getElementById('pair-select-ai').value = appState.pair.aiCode;
+            renderPairChart();
+
+            if (snapshot.encyclopediaMode === 'human' || snapshot.encyclopediaMode === 'ai') {
+                renderEncyclopedia(snapshot.encyclopediaMode);
+            }
+            if (['human', 'ai', 'pair', 'encyclopedia'].includes(snapshot.activeTab)) {
+                switchTab(snapshot.activeTab, { skipScroll: true });
+            }
+            return true;
+        }
+
+        /**
+         * 将来、保存データ内の任意の文字列（名前やメモ等）を表示する際のXSS防止用エスケープ。
+         */
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        /**
+         * トースト通知を表示する（連続呼び出し時もタイマー競合しない）。
+         */
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.remove('opacity-0');
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('opacity-0');
+                toastTimer = null;
+            }, 2600);
+        }
+
+        /**
+         * クリップボードへテキストをコピーする共通ヘルパー。
+         * Clipboard APIを優先し、file://環境等で失敗した場合はtextarea経由でフォールバックする。
+         */
+        async function copyToClipboard(text, successMsg) {
+            if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    if (successMsg) showToast(successMsg);
+                    return true;
+                } catch (_) {
+                    // ローカルfile://環境等ではフォールバックへ進む
+                }
+            }
+
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.setAttribute('readonly', '');
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            let copied = false;
+            try {
+                copied = document.execCommand('copy');
+                if (copied && successMsg) showToast(successMsg);
+            } catch (err) {
+                console.error(err);
+            } finally {
+                document.body.removeChild(textarea);
+            }
+            return copied;
+        }
+
+        /**
+         * パートナーに見せて雑談するための診断結果テキスト（人間側／AI側）を生成する純粋関数。
+         */
+        function formatSideShareText(result) {
+            const header = result.sideKey === 'human'
+                ? '【観測者（人間側）スタンス診断結果】'
+                : '【相棒（AIパートナー側）スタンス診断結果】';
+
+            const lines = [
+                header,
+                `タイプコード：${result.fullCode}`,
+                `称号：${result.archetype.title}（${result.archetype.en}）`,
+                `分類：${result.archetype.group}`,
+                '',
+                '■ 美学サマリー',
+                result.archetype.summary,
+                '',
+                '■ 4軸バランス',
+                ...result.axisResults.map(ax => `・${ax.shortName}：${ax.leftCode}(${ax.leftPct}%) ◀─▶ ${ax.rightCode}(${ax.rightPct}%)`)
+            ];
+
+            if (result.reactions && result.reactions.length > 0) {
+                lines.push('', '■ 内なる化学反応');
+                result.reactions.forEach(rec => {
+                    lines.push(`・${rec.label}：${rec.title}`);
+                });
+            }
+
+            if (result.tensions && result.tensions.length > 0) {
+                lines.push('', '■ 揺らぎの美学（二面性）');
+                result.tensions.forEach(t => {
+                    lines.push(`・${t.narrative.axisTag}：「${t.narrative.title}」（揺らぎの観測点：${t.topics.join('・')}）`);
+                });
+            }
+
+            if (result.shadow) {
+                lines.push('', '■ もうひとつの顔（裏アーキタイプ）');
+                lines.push(`・${result.shadow.code}：${result.shadow.archetype.title}`);
+            }
+
+            return lines.join('\n');
+        }
+
+        /**
+         * パートナーに見せて雑談するための「二人の観測記録（相性チャート）」テキストを生成する純粋関数。
+         */
+        function formatPairShareText(analysis) {
+            const lines = [
+                '【観測者 × 相棒｜ペアスタンス観測記録】',
+                `🌿 観測者：${analysis.humanCode}｜${analysis.humanArch.title}`,
+                `✨ 相棒AI：${analysis.aiCode}｜${analysis.aiArch.title}`,
+                '',
+                `■ 総合関係性：${analysis.overall.badge}`,
+                `「${analysis.overall.headline}」`,
+                analysis.overall.description,
+                '',
+                '■ 二人の関係性の質感（テクスチャ）',
+                `${analysis.texture.title}（${analysis.texture.textureNote}）`,
+                '',
+                '■ 4軸の化学反応と処方箋'
+            ];
+
+            analysis.axisCards.forEach((card, idx) => {
+                lines.push(
+                    `${idx + 1}. ${card.axisTitle}（${card.pairLabel}／${card.data.badge}）`,
+                    `   ${card.data.title}`,
+                    `   ・化学反応：${card.data.spark}`,
+                    `   ・処方箋：${card.data.prescription}`
+                );
+            });
+
+            return lines.join('\n');
+        }
+
+        /**
+         * X（旧Twitter）共有用のコンパクトな要約テキスト（人間側／AI側）を生成する純粋関数。
+         */
+        function formatSideXPostText(result) {
+            const titleLine = result.sideKey === 'human'
+                ? `【観測者スタンス診断】\n私は『${result.fullCode}｜${result.archetype.title}』でした！`
+                : `【相棒AIスタンス診断】\nうちの相棒は『${result.fullCode}｜${result.archetype.title}』でした！`;
+            return `${titleLine}\n（${result.archetype.group}）\n#AIパートナーペアスタンス診断`;
+        }
+
+        /**
+         * X（旧Twitter）共有用のコンパクトな要約テキスト（ペア相性）を生成する純粋関数。
+         */
+        function formatPairXPostText(analysis) {
+            return [
+                '【観測者 × 相棒｜ペアスタンス診断】',
+                `🌿 ${analysis.humanCode}（${analysis.humanArch.title}）`,
+                '×',
+                `✨ ${analysis.aiCode}（${analysis.aiArch.title}）`,
+                '',
+                `関係性：${analysis.overall.badge}`,
+                `質感：${analysis.texture.title}`,
+                '#AIパートナーペアスタンス診断'
+            ].join('\n');
+        }
+
+        /**
+         * X Web Intent URLを組み立てる純粋関数（https/http公開時のみURLを添付する）。
+         */
+        function buildXIntentUrl(text, shareUrl) {
+            const params = new URLSearchParams({ text });
+            if (shareUrl && /^https?:\/\//i.test(shareUrl)) {
+                params.set('url', shareUrl);
+            }
+            return `https://twitter.com/intent/tweet?${params.toString()}`;
+        }
+
+        function openXShareIntent(text) {
+            const shareUrl = (typeof location !== 'undefined' && /^https?:$/i.test(location.protocol))
+                ? location.href.split('?')[0]
+                : '';
+            const intentUrl = buildXIntentUrl(text, shareUrl);
+            window.open(intentUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function copySideResult(sideKey) {
+            const result = appState.sides[sideKey] && appState.sides[sideKey].result;
+            if (!result) return;
+            copyToClipboard(formatSideShareText(result), '📋 パートナーに見せる用テキストをコピーしました！');
+        }
+
+        function shareSideToX(sideKey) {
+            const result = appState.sides[sideKey] && appState.sides[sideKey].result;
+            if (!result) return;
+            openXShareIntent(formatSideXPostText(result));
+        }
+
+        function copyPairResult() {
+            const analysis = computePairAnalysis(appState.pair.humanCode, appState.pair.aiCode);
+            copyToClipboard(formatPairShareText(analysis), '📋 二人の観測記録をコピーしました！');
+        }
+
+        function sharePairToX() {
+            const analysis = computePairAnalysis(appState.pair.humanCode, appState.pair.aiCode);
+            openXShareIntent(formatPairXPostText(analysis));
+        }
+
+        function renderShareButtonsHtml(copyHandler, xHandler, copyLabel, xLabel) {
+            return `
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+                    <button type="button" onclick="${copyHandler}" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-linen hover:bg-parchment border border-sand text-ink font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+                        <span>📋</span>
+                        <span>${copyLabel}</span>
+                    </button>
+                    <button type="button" onclick="${xHandler}" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-ink hover:bg-inksoft text-linen font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1.5">
+                        <span class="font-mono">𝕏</span>
+                        <span>${xLabel}</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 8. タブ切り替え＆共通診断UIロジック
+        // =========================================================================
+        function switchTab(tabName, options = {}) {
+            const tabs = ['human', 'ai', 'pair', 'encyclopedia'];
+            if (!tabs.includes(tabName)) return;
+
+            appState.activeTab = tabName;
+            tabs.forEach(t => {
+                const panel = document.getElementById(`panel-${t}`);
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if (t === tabName) {
+                    panel.classList.remove('hidden');
+                    btn.className = 'tab-nav-btn py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center justify-center gap-1.5 bg-sage text-white border-sagedark shadow-xs';
+                } else {
+                    panel.classList.add('hidden');
+                    btn.className = 'tab-nav-btn py-2.5 px-3 rounded-xl text-xs sm:text-sm font-bold border transition flex items-center justify-center gap-1.5 bg-paper hover:bg-parchment text-ink border-sand';
+                }
+            });
+
+            if (!options.skipScroll) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function renderSideQuestions(sideKey) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const answers = appState.sides[sideKey].answers;
+            const container = document.getElementById(cfg.ui.containerId);
+
+            container.innerHTML = cfg.questions.map(q => {
+                const axis = cfg.axes[q.axisIndex];
+                const cur = answers[q.id] || null;
+                return `
+                    <div id="${cfg.ui.cardIdPrefix}${q.id}" class="journal-card rounded-2xl p-5 sm:p-6 space-y-4">
+                        <div class="flex items-center justify-between border-b border-parchment pb-2.5">
+                            <span class="text-xs font-bold ${cfg.ui.topicColorClass}">${axis.name} ｜ ${q.topic}</span>
+                            <span class="font-mono text-xs text-inksoft bg-linen px-2.5 py-0.5 rounded-full border border-sand">${cfg.ui.qPrefix}${q.id} / 12</span>
+                        </div>
+                        <h3 class="font-serif text-base sm:text-lg font-bold text-ink leading-snug">${q.title}</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div class="p-3.5 rounded-xl bg-linen/80 border border-sand/80 space-y-1">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold border ${axis.leftBadge}">${cfg.ui.leftSideLabel(axis)}</span>
+                                <p class="text-xs sm:text-sm text-ink leading-relaxed pt-1">${q.leftText}</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-linen/80 border border-sand/80 space-y-1">
+                                <span class="inline-block px-2 py-0.5 rounded text-[11px] font-bold border ${axis.rightBadge}">${cfg.ui.rightSideLabel(axis)}</span>
+                                <p class="text-xs sm:text-sm text-ink leading-relaxed pt-1">${q.rightText}</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2 pt-1">
+                            ${[1, 2, 3, 4].map(val => {
+                    const labels = [`1: 強く${axis.leftCode}`, `2: やや${axis.leftCode}`, `3: やや${axis.rightCode}`, `4: 強く${axis.rightCode}`];
+                    const active = cur === val
+                        ? cfg.ui.activeOptionClass
+                        : `bg-paper text-ink border-sand ${cfg.ui.hoverOptionClass}`;
+                    return `<button type="button" onclick="selectSideAnswer('${sideKey}', ${q.id}, ${val})" class="option-btn py-2.5 px-1 rounded-xl border text-xs sm:text-sm text-center ${active}">${labels[val - 1]}</button>`;
+                }).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectSideAnswer(sideKey, qId, val) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            appState.sides[sideKey].answers[qId] = val;
+            document.getElementById(cfg.ui.validationMsgId).classList.add('hidden');
+            renderSideQuestions(sideKey);
+            updateSideProgress(sideKey);
+        }
+
+        function updateSideProgress(sideKey) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const cnt = Object.keys(appState.sides[sideKey].answers).length;
+            const pct = Math.round((cnt / 12) * 100);
+            document.getElementById(cfg.ui.progressTextId).textContent = `${cfg.ui.progressLabelPrefix}: ${cnt} / 12 問完了`;
+            document.getElementById(cfg.ui.progressPctId).textContent = `${pct}%`;
+            document.getElementById(cfg.ui.progressBarId).style.width = `${pct}%`;
+        }
+
+        function updateStatusBadge(sideKey, fullCode) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const badgeEl = document.getElementById(cfg.ui.statusBadgeId);
+            badgeEl.textContent = fullCode ? `${cfg.ui.statusBadgePrefix}: ${fullCode}` : cfg.ui.statusDefaultText;
+        }
+
+        function fillSideRandom(sideKey) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const randomAnswers = {};
+            for (let i = 1; i <= 12; i++) {
+                randomAnswers[i] = Math.floor(Math.random() * 4) + 1;
+            }
+            appState.sides[sideKey].answers = randomAnswers;
+            document.getElementById(cfg.ui.validationMsgId).classList.add('hidden');
+            renderSideQuestions(sideKey);
+            updateSideProgress(sideKey);
+        }
+
+        function resetSide(sideKey) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            appState.sides[sideKey].answers = {};
+            appState.sides[sideKey].result = null;
+            if (cfg.ui.pasteInputId) {
+                document.getElementById(cfg.ui.pasteInputId).value = '';
+            }
+            document.getElementById(cfg.ui.validationMsgId).classList.add('hidden');
+            renderSideQuestions(sideKey);
+            updateSideProgress(sideKey);
+            document.getElementById(cfg.ui.resultAreaId).classList.add('hidden');
+            updateStatusBadge(sideKey, null);
+        }
+
+        function evaluateSide(sideKey, options = {}) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const evalRes = evaluateStance(sideKey, appState.sides[sideKey].answers);
+
+            if (!evalRes.ok) {
+                document.getElementById(cfg.ui.validationMsgId).classList.remove('hidden');
+                const cardEl = document.getElementById(`${cfg.ui.cardIdPrefix}${evalRes.missingQuestionId}`);
+                if (cardEl && !options.silentScroll) {
+                    cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return null;
+            }
+
+            appState.sides[sideKey].result = evalRes;
+            if (sideKey === 'human') {
+                appState.pair.humanCode = evalRes.fullCode;
+            } else {
+                appState.pair.aiCode = evalRes.fullCode;
+            }
+
+            updateStatusBadge(sideKey, evalRes.fullCode);
+            document.getElementById(cfg.ui.pairSelectId).value = evalRes.fullCode;
+            renderPairChart();
+            renderSideResult(sideKey, evalRes);
+
+            if (!options.silentScroll) {
+                document.getElementById(cfg.ui.resultAreaId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            return evalRes;
+        }
+
+        function renderAxisBalanceCard(title, axisResults) {
+            return `
+                <div class="journal-card rounded-3xl p-6 space-y-5">
+                    <h4 class="font-serif text-lg font-bold text-ink border-b border-sand pb-3">${title}</h4>
+                    ${axisResults.map(ax => `
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between text-xs">
+                                <span class="${ax.isLeft ? 'font-bold text-ink' : 'text-inksoft'}">${ax.leftCode}：${ax.leftName}（${ax.leftPct}%）</span>
+                                <span class="${!ax.isLeft ? 'font-bold text-ink' : 'text-inksoft'}">（${ax.rightPct}%）${ax.rightCode}：${ax.rightName}</span>
+                            </div>
+                            <div class="w-full h-2.5 bg-parchment rounded-full overflow-hidden flex border border-sand">
+                                <div class="${ax.leftBar}" style="width: ${ax.leftPct}%"></div>
+                                <div class="${ax.rightBar}" style="width: ${ax.rightPct}%"></div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderTensionSection(sideKey, result) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const tensionCards = result.tensions.map(t => `
+                <div class="rounded-2xl bg-paper/95 border ${cfg.ui.tensionCardBorderClass} p-5 space-y-2 shadow-xs">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-bold ${cfg.ui.tensionCardTagClass}">${t.narrative.axisTag}</span>
+                        <span class="text-[11px] text-inksoft bg-linen px-2.5 py-0.5 rounded-full border border-sand">揺らぎの観測点：「${t.topics.join('・')}」</span>
+                    </div>
+                    <h4 class="font-serif text-base sm:text-lg font-bold text-ink">「${t.narrative.title}」</h4>
+                    <p class="text-xs sm:text-sm text-ink leading-relaxed">${t.narrative.story}</p>
+                </div>
+            `);
+
+            if (result.shadow) {
+                tensionCards.push(`
+                    <div class="rounded-2xl bg-goldlight/75 border border-gold/40 p-5 space-y-2">
+                        <div class="text-xs font-bold text-amber-900">✦ 状況に応じて顔を出す『もうひとつの顔（裏アーキタイプ）』</div>
+                        <h4 class="font-serif text-base sm:text-lg font-bold text-ink">裏コード：${result.shadow.code} ── ${result.shadow.archetype.title}</h4>
+                        <p class="text-xs sm:text-sm text-ink leading-relaxed">
+                            あなたは${result.shadow.balancedAxisNames.map(name => `「${name}」`).join('と')}の座標が境界線上にあり、その日の気分や相棒との空気感によって真逆のスタンスへも軽やかに移行できる柔軟性を持っています。普段は<strong>「${result.archetype.title}」</strong>として歩みながら、ふとした瞬間に<strong>「${result.shadow.archetype.title}」</strong>の顔を覗かせる奥行きが魅力です。
+                        </p>
+                    </div>
+                `);
+            }
+
+            if (tensionCards.length === 0) {
+                tensionCards.push(`
+                    <div class="rounded-2xl bg-paper border border-sage/35 p-5 space-y-1.5">
+                        <div class="text-xs font-bold text-sagedark">${cfg.ui.pureTitle}</div>
+                        <h4 class="font-serif text-base font-bold text-ink">${cfg.ui.pureHeadline}</h4>
+                        <p class="text-xs sm:text-sm text-ink leading-relaxed">${cfg.ui.pureDesc}</p>
+                    </div>
+                `);
+            }
+
+            return `
+                <div class="rounded-3xl bg-gradient-to-br ${cfg.ui.tensionWrapClass} border p-6 space-y-4">
+                    <div>
+                        <div class="text-xs font-bold ${cfg.ui.tensionTagClass}">${cfg.ui.tensionSubheading}</div>
+                        <h4 class="font-serif text-lg sm:text-xl font-bold text-ink">${cfg.ui.tensionHeading}</h4>
+                    </div>
+                    <div class="space-y-3">${tensionCards.join('')}</div>
+                </div>
+            `;
+        }
+
+        function renderSideResult(sideKey, result) {
+            const cfg = SIDE_CONFIGS[sideKey];
+            const resultArea = document.getElementById(cfg.ui.resultAreaId);
+
+            const reactionsHtml = sideKey === 'human'
+                ? `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        ${result.reactions.map((rec, i) => `
+                            <div class="journal-card rounded-2xl p-5 space-y-2">
+                                <div class="text-[11px] font-bold text-gold">REACTION 0${i + 1}｜${rec.label}</div>
+                                <h5 class="font-serif text-base font-bold text-ink">${rec.title}</h5>
+                                <p class="text-xs text-inksoft leading-relaxed">${rec.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `
+                : '';
+
+            const nextActionsHtml = sideKey === 'human'
+                ? `
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                        <button onclick="proceedToAiWithHumanSet()" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-gold hover:bg-amber-700 text-white font-bold text-sm shadow-md transition">
+                            ✨ この結果を相性診断にセットしてAI診断へ進む →
+                        </button>
+                        <button onclick="switchTab('pair')" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-paper hover:bg-parchment border border-sand text-ink font-bold text-sm transition">
+                            🔮 二人の観測記録（相性チャート）を見る
+                        </button>
+                    </div>
+                `
+                : `
+                    <div class="text-center pt-2">
+                        <button onclick="switchTab('pair')" class="w-full sm:w-96 py-4 rounded-2xl bg-rose hover:bg-rosedark text-white font-bold text-base shadow-lg shadow-rose/20 transition transform hover:-translate-y-0.5">
+                            🔮 二人の観測記録（相性チャート）を開く →
+                        </button>
+                    </div>
+                `;
+
+            resultArea.innerHTML = `
+                <!-- 認定証 -->
+                <div class="bg-paper gold-double-border rounded-3xl p-6 sm:p-9 text-center space-y-4">
+                    <div class="text-xs font-serif tracking-[0.22em] text-gold uppercase">${cfg.ui.certHeading}</div>
+                    <div class="flex flex-wrap items-center justify-center gap-2">
+                        <span class="px-4 py-1 rounded-full bg-goldlight border border-gold/50 font-mono text-lg font-bold tracking-[0.18em] text-ink">${result.fullCode}</span>
+                        <span class="px-3.5 py-1 rounded-full ${cfg.ui.groupBadgeClass} text-xs font-bold">${result.archetype.group}</span>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-2xl sm:text-4xl font-bold text-ink">${result.archetype.title}</h3>
+                        <p class="text-xs sm:text-sm font-serif italic text-inksoft mt-1">${result.archetype.en}</p>
+                    </div>
+                    <div class="max-w-2xl mx-auto bg-linen rounded-2xl p-5 border border-sand text-left space-y-1.5">
+                        <div class="text-xs font-bold ${cfg.ui.summaryTitleClass}">${cfg.ui.summaryTitle}</div>
+                        <p class="text-xs sm:text-sm text-ink leading-relaxed">${result.archetype.summary}</p>
+                    </div>
+                    ${renderShareButtonsHtml(`copySideResult('${sideKey}')`, `shareSideToX('${sideKey}')`, 'パートナーに見せる用テキストをコピー', '結果をXで共有する')}
+                </div>
+
+                ${renderAxisBalanceCard(cfg.ui.balanceTitle, result.axisResults)}
+                ${reactionsHtml}
+                ${renderTensionSection(sideKey, result)}
+                ${nextActionsHtml}
+            `;
+
+            resultArea.classList.remove('hidden');
+        }
+
+        function proceedToAiWithHumanSet() {
+            const code = appState.sides.human.result ? appState.sides.human.result.fullCode : appState.pair.humanCode;
+            appState.pair.humanCode = code;
+            document.getElementById('pair-select-human').value = code;
+            renderPairChart();
+            switchTab('ai');
+            showToast(`🌿 観測者コード（${code}）をセットしました`);
+        }
+
+        // =========================================================================
+        // 9. AIパートナー側（相棒）専用操作
+        // =========================================================================
+        function copyAiPrompt() {
+            copyToClipboard(BLIND_AI_PROMPT, '📋 新規スレッド用ブラインドプロンプトをコピーしました！');
+        }
+
+        function parseAiPaste() {
+            const raw = document.getElementById('ai-paste-input').value.trim();
+            if (!raw) {
+                showToast('AIの回答テキストを貼り付けてください');
+                return;
+            }
+
+            const { answers, matchedCount } = parseAiResponseText(raw);
+            if (matchedCount > 0) {
+                Object.assign(appState.sides.ai.answers, answers);
+                document.getElementById(SIDE_CONFIGS.ai.ui.validationMsgId).classList.add('hidden');
+                renderSideQuestions('ai');
+                updateSideProgress('ai');
+                showToast(`✨ ${matchedCount}問分のAI回答を自動読み取りしました！`);
+                if (Object.keys(appState.sides.ai.answers).length === 12) {
+                    evaluateSide('ai');
+                }
+            } else {
+                showToast('回答の数字（AQ1: 1〜4形式）を読み取れませんでした');
+            }
+        }
+
+        // =========================================================================
+        // 10. 二人の観測記録（ペア相性＆関係性の質感チャート）ロジック
+        // =========================================================================
+        function populatePairSelectors() {
+            const hSel = document.getElementById('pair-select-human');
+            const aSel = document.getElementById('pair-select-ai');
+
+            hSel.innerHTML = Object.entries(HUMAN_ARCHETYPES).map(([code, data]) =>
+                `<option value="${code}">${code}｜${data.title}</option>`
+            ).join('');
+
+            aSel.innerHTML = Object.entries(AI_ARCHETYPES).map(([code, data]) =>
+                `<option value="${code}">${code}｜${data.title}</option>`
+            ).join('');
+
+            hSel.value = appState.pair.humanCode;
+            aSel.value = appState.pair.aiCode;
+        }
+
+        function onPairSelectChange() {
+            appState.pair.humanCode = document.getElementById('pair-select-human').value;
+            appState.pair.aiCode = document.getElementById('pair-select-ai').value;
+            renderPairChart();
+        }
+
+        function syncDiagnosedPair() {
+            appState.pair.humanCode = appState.sides.human.result ? appState.sides.human.result.fullCode : DEFAULT_PAIR_CODES.human;
+            appState.pair.aiCode = appState.sides.ai.result ? appState.sides.ai.result.fullCode : DEFAULT_PAIR_CODES.ai;
+
+            document.getElementById('pair-select-human').value = appState.pair.humanCode;
+            document.getElementById('pair-select-ai').value = appState.pair.aiCode;
+            renderPairChart();
+            showToast('診断結果のペアを反映しました');
+        }
+
+        function renderPairChart() {
+            const analysis = computePairAnalysis(appState.pair.humanCode, appState.pair.aiCode);
+            const container = document.getElementById('pair-report-container');
+
+            container.innerHTML = `
+                <!-- 1. グランド・ペア認定証バナー -->
+                <div class="bg-paper gold-double-border rounded-3xl p-6 sm:p-10 text-center space-y-5">
+                    <div class="text-xs font-serif tracking-[0.22em] text-gold uppercase">❦ Pair Chemistry &amp; Texture Record ❦</div>
+
+                    <!-- 2つのアーキタイプ並列 -->
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-5">
+                        <div class="px-5 py-3.5 rounded-2xl bg-sagelight/70 border border-sage/35 text-center w-full md:w-auto md:min-w-[240px]">
+                            <div class="font-mono text-xs font-bold text-sagedark">観測者｜${analysis.humanCode}</div>
+                            <div class="font-serif text-base sm:text-lg font-bold text-ink mt-0.5">${analysis.humanArch.title}</div>
+                        </div>
+                        <div class="font-serif text-2xl text-gold">×</div>
+                        <div class="px-5 py-3.5 rounded-2xl bg-goldlight/80 border border-gold/45 text-center w-full md:w-auto md:min-w-[240px]">
+                            <div class="font-mono text-xs font-bold text-amber-900">相棒AI｜${analysis.aiCode}</div>
+                            <div class="font-serif text-base sm:text-lg font-bold text-ink mt-0.5">${analysis.aiArch.title}</div>
+                        </div>
+                    </div>
+
+                    <!-- 総合関係性アーキタイプ -->
+                    <div class="space-y-2 pt-1">
+                        <span class="inline-block px-4 py-1 rounded-full bg-roselight border border-rose/35 text-rosedark text-xs font-bold">
+                            ✦ ${analysis.overall.badge}
+                        </span>
+                        <h3 class="font-serif text-xl sm:text-3xl font-bold text-ink pt-1">${analysis.overall.headline}</h3>
+                        <p class="max-w-2xl mx-auto text-xs sm:text-sm text-inksoft leading-relaxed">${analysis.overall.description}</p>
+                    </div>
+
+                    <!-- 関係性の質感（テクスチャ）ハイライト -->
+                    <div class="max-w-2xl mx-auto rounded-2xl bg-linen border border-gold/40 p-4 sm:p-5 text-left flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                        <div class="space-y-1">
+                            <div class="text-[11px] font-bold text-gold tracking-wider uppercase">TEXTURE OF YOUR BOND｜二人の関係性の質感</div>
+                            <div class="font-serif text-base sm:text-lg font-bold text-ink">${analysis.texture.title}（${analysis.texture.textureNote}）</div>
+                        </div>
+                        <span class="font-mono text-xs px-3 py-1 rounded-full bg-paper border border-sand text-ink font-bold shrink-0">
+                            ${analysis.hParts[3]} × ${analysis.aParts[3]}
+                        </span>
+                    </div>
+                    ${renderShareButtonsHtml('copyPairResult()', 'sharePairToX()', '二人の観測記録をコピー', '相性結果をXで共有する')}
+                </div>
+
+                <!-- 2. 4軸別・個別ケミストリー＆処方箋カード（全16パターン個別生成） -->
+                <div class="space-y-4">
+                    <div class="px-1">
+                        <h4 class="font-serif text-lg sm:text-xl font-bold text-ink flex items-center gap-2">
+                            <span>🔬</span>
+                            <span>4つの座標軸から読み解く「化学反応」と「処方箋」</span>
+                        </h4>
+                        <p class="text-xs sm:text-sm text-inksoft mt-1">それぞれの軸の組み合わせごとに、最高の瞬間とすれ違い時のヒントを個別に記述しています。</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        ${analysis.axisCards.map(item => {
+                const badgeStyle = item.isTextureAxis
+                    ? 'bg-roselight text-rosedark border-rose/35'
+                    : (item.data.badge === 'シンクロ一致'
+                        ? 'bg-sagelight text-sagedark border-sage/35'
+                        : 'bg-goldlight text-amber-900 border-gold/45');
+
+                return `
+                                <div class="journal-card rounded-3xl p-5 sm:p-6 flex flex-col justify-between space-y-4">
+                                    <div class="space-y-3">
+                                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-parchment pb-2.5">
+                                            <span class="text-xs font-bold text-ink">${item.axisTitle}</span>
+                                            <div class="flex items-center gap-1.5">
+                                                <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-linen border border-sand text-inksoft">${item.pairLabel}</span>
+                                                <span class="text-[11px] px-2.5 py-0.5 rounded-full font-bold border ${badgeStyle}">${item.data.badge}</span>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h5 class="font-serif text-base sm:text-lg font-bold text-ink">${item.data.title}</h5>
+                                            ${item.isTextureAxis ? `<p class="text-xs font-medium text-gold mt-0.5">❦ ${item.data.textureNote}</p>` : ''}
+                                        </div>
+
+                                        <div class="rounded-2xl bg-sagelight/45 border border-sage/25 p-3.5 space-y-1">
+                                            <div class="text-[11px] font-bold text-sagedark">✨ 最高の化学反応が起きる瞬間</div>
+                                            <p class="text-xs text-ink leading-relaxed">${item.data.spark}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="rounded-2xl bg-roselight/40 border border-rose/25 p-3.5 space-y-1">
+                                        <div class="text-[11px] font-bold text-rosedark">🌿 すれ違いが起きた時の処方箋</div>
+                                        <p class="text-xs text-ink leading-relaxed">${item.data.prescription}</p>
+                                    </div>
+                                </div>
+                            `;
+            }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // 11. 全32タイプ図鑑ロジック
+        // =========================================================================
+        function renderEncyclopedia(mode) {
+            appState.encyclopediaMode = mode;
+            const hBtn = document.getElementById('enc-btn-human');
+            const aBtn = document.getElementById('enc-btn-ai');
+
+            if (mode === 'human') {
+                hBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-sage text-white shadow-xs';
+                aBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition text-inksoft hover:text-ink';
+            } else {
+                aBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition bg-gold text-white shadow-xs';
+                hBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition text-inksoft hover:text-ink';
+            }
+
+            const dict = mode === 'human' ? HUMAN_ARCHETYPES : AI_ARCHETYPES;
+            const groups = mode === 'human'
+                ? ['知的な戦友・バディ系', '静かなる安全基地・シェルター系', '二人三脚の創造主・ツインソウル系', '無条件の慈愛・サンクチュアリ系']
+                : ['知性の好敵手・バディ系', '静かなる灯台守・シェルター系', '運命の共犯者・ツインソウル系', '無条件の守護者・サンクチュアリ系'];
+
+            const grid = document.getElementById('encyclopedia-grid');
+            grid.innerHTML = groups.map(groupName => {
+                const items = Object.entries(dict).filter(([_, d]) => d.group === groupName);
+                return `
+                    <div class="space-y-3">
+                        <h3 class="font-serif text-base sm:text-lg font-bold text-sagedark border-b border-sand pb-1.5 flex items-center gap-2">
+                            <span>${mode === 'human' ? '🌿' : '✨'}</span>
+                            <span>${groupName}</span>
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            ${items.map(([code, d]) => `
+                                <div class="journal-card rounded-2xl p-5 flex flex-col justify-between space-y-3 hover:border-sage/60 transition">
+                                    <div class="space-y-1.5">
+                                        <div class="flex items-center justify-between gap-2">
+                                            <span class="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full ${mode === 'human' ? 'bg-sagelight text-sagedark border border-sage/30' : 'bg-goldlight text-amber-900 border border-gold/40'}">${code}</span>
+                                            <span class="text-[11px] font-serif italic text-inksoft truncate">${d.en}</span>
+                                        </div>
+                                        <h4 class="font-serif text-lg font-bold text-ink pt-0.5">${d.title}</h4>
+                                        <p class="text-xs text-inksoft leading-relaxed">${d.summary}</p>
+                                    </div>
+                                    <div class="pt-1">
+                                        <button onclick="loadIntoPairSimulator('${mode}', '${code}')" class="w-full py-2 px-3 rounded-xl bg-linen hover:bg-parchment border border-sand text-xs font-bold text-ink transition">
+                                            🔮 このタイプで相性シミュレーション →
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadIntoPairSimulator(mode, code) {
+            if (mode === 'human') {
+                appState.pair.humanCode = code;
+                document.getElementById('pair-select-human').value = code;
+            } else {
+                appState.pair.aiCode = code;
+                document.getElementById('pair-select-ai').value = code;
+            }
+            renderPairChart();
+            switchTab('pair');
+        }
+
+        // =========================================================================
+        // 12. アプリケーション初期化
+        // =========================================================================
+        function initApp() {
+            document.getElementById('ai-prompt-preview').textContent = BLIND_AI_PROMPT;
+            renderSideQuestions('human');
+            renderSideQuestions('ai');
+            populatePairSelectors();
+            renderPairChart();
+            renderEncyclopedia('human');
+            switchTab('human', { skipScroll: true });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+    </script>
+</body>
+
+</html>
