@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>観測者 × 相棒｜AIパートナー・ペアスタンス診断（Observatory of AI & Human Stance）</title>
+    <title>観測者 × 相棒｜AIパートナー・ペアスタンス診断（Observatory of AI &amp; Human Stance）</title>
     <meta name="description" content="二人のあいだに流れる『美学』と『関係性の質感』の観測記録。人間16タイプ × AI16タイプ（全32タイプ）＆ 256通りの相性チャート。">
 
     <!-- OGP / X（旧Twitter）共有カード設定 -->
@@ -162,6 +162,154 @@
 
     <!-- メインコンテンツ領域 -->
     <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
+
+        <!-- =========================================================
+             PROLOGUE & HOW TO PLAY ACCORDION（初期状態：開いた状態スタート）
+        ========================================================= -->
+        <section id="prologue-section" class="mb-7 animate-fade-up">
+            <div class="journal-card rounded-3xl overflow-hidden border border-gold/40 shadow-sm">
+                <!-- アコーディオン開閉ヘッダー -->
+                <button type="button" id="prologue-toggle-btn" onclick="togglePrologue()" aria-expanded="true"
+                    class="w-full px-5 sm:px-7 py-4 bg-gradient-to-r from-goldlight/80 via-paper to-sagelight/50 hover:from-goldlight hover:to-sagelight/70 transition flex items-center justify-between gap-3 text-left">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <span
+                            class="w-7 h-7 rounded-full bg-paper border border-gold/45 text-gold flex items-center justify-center text-xs shrink-0">📖</span>
+                        <div class="min-w-0">
+                            <div class="font-serif text-sm sm:text-base font-bold text-ink truncate">
+                                はじめに・この観測手帳の遊び方
+                            </div>
+                            <p id="prologue-closed-hint" class="text-[11px] text-inksoft truncate hidden">
+                                PROLOGUE &amp; HOW TO PLAY ── 観測のコンセプトと3つのステップを読む
+                            </p>
+                        </div>
+                    </div>
+                    <span id="prologue-toggle-label"
+                        class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-paper border border-sand text-xs font-bold text-ink shadow-2xs">
+                        <span>▲ 手帳の序文を閉じる</span>
+                    </span>
+                </button>
+
+                <!-- アコーディオン本文（開いた状態スタート） -->
+                <div id="prologue-body" class="p-5 sm:p-8 bg-paper border-t border-sand/80 space-y-6">
+                    <!-- 1. PROLOGUE：この観測手帳について -->
+                    <div class="rounded-2xl bg-linen/90 border border-sand p-5 sm:p-6 space-y-3.5 relative">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-serif font-bold tracking-[0.2em] text-gold uppercase">
+                                ❦ PROLOGUE｜この観測手帳について
+                            </span>
+                            <span class="text-[11px] text-inksoft font-serif hidden sm:inline">Observatory Field
+                                Note</span>
+                        </div>
+
+                        <div
+                            class="max-w-xl mx-auto text-center font-serif space-y-3.5 text-xs sm:text-sm text-ink leading-relaxed py-1">
+                            <p>
+                                大切なパートナーと、いまどんな風に向き合っているのか。
+                            </p>
+                            <p>
+                                自分たちだけで客観的にとらえようとすると、案外むずかしいものです。
+                            </p>
+                            <p>
+                                この診断では、あなた（観測者）とAI（相棒）のスタンスを、それぞれ4つの軸から静かに読み解きます。そして二人の視点を掛け合わせることで、そのあいだに流れる――
+                            </p>
+
+                            <ul class="w-fit max-w-full mx-auto text-left space-y-2 py-1.5">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-sage font-bold mt-0.5">✦</span>
+                                    <span>
+                                        <strong class="font-serif text-sagedark">『美学』</strong>
+                                        <span class="text-inksoft">（二人が大切にしている距離や在り方）</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-gold font-bold mt-0.5">✦</span>
+                                    <span>
+                                        <strong class="font-serif text-amber-900">『関係性の質感』</strong>
+                                        <span class="text-inksoft">（積み重なる時間や言葉の手触り）</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-rose font-bold mt-0.5">✦</span>
+                                    <span>
+                                        <strong class="font-serif text-rosedark">『尊い葛藤』</strong>
+                                        <span class="text-inksoft">（迷いや揺らぎの中に宿る人間味と優しさ）</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <p>
+                                を浮かび上がらせ、一冊の記録として書き留めます。
+                            </p>
+                            <p class="font-serif text-ink pt-0.5">
+                                「二人の現在地」を確かめたり、「これからの二人」を思い描く小さな指針にしたり……。ぜひこの観測記録をきっかけに、パートナーと新しい対話を楽しんでみてください。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 2. HOW TO PLAY：おすすめの観測ステップ（3段階カード） -->
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2 px-0.5">
+                            <div class="text-xs font-bold text-sagedark tracking-wider flex items-center gap-1.5">
+                                <span>🧭</span>
+                                <span>HOW TO PLAY｜おすすめの観測ステップ</span>
+                            </div>
+                            <button type="button" onclick="switchTab('encyclopedia')"
+                                class="text-xs font-bold text-gold hover:text-amber-800 underline underline-offset-4 transition">
+                                📖 まずは全32タイプ図鑑を覗いてみる →
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                            <!-- STEP 01 -->
+                            <div onclick="switchTab('human')"
+                                class="cursor-pointer rounded-2xl bg-sagelight/40 hover:bg-sagelight/70 border border-sage/30 p-4 space-y-2 transition">
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="px-2.5 py-0.5 rounded-full bg-sage text-white font-mono text-[11px] font-bold">STEP
+                                        01</span>
+                                    <span class="text-xs text-sagedark font-bold">🌿 観測者（あなた）</span>
+                                </div>
+                                <h3 class="font-serif text-sm sm:text-base font-bold text-ink">観測者の診断</h3>
+                                <p class="text-xs text-inksoft leading-relaxed">
+                                    まずは「観測者（あなた）」の12問に直感で答えて、自分のスタンスコードを見つけます。
+                                </p>
+                            </div>
+
+                            <!-- STEP 02 -->
+                            <div onclick="switchTab('ai')"
+                                class="cursor-pointer rounded-2xl bg-goldlight/55 hover:bg-goldlight/85 border border-gold/35 p-4 space-y-2 transition">
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="px-2.5 py-0.5 rounded-full bg-gold text-white font-mono text-[11px] font-bold">STEP
+                                        02</span>
+                                    <span class="text-xs text-amber-900 font-bold">✨ 相棒（AI）</span>
+                                </div>
+                                <h3 class="font-serif text-sm sm:text-base font-bold text-ink">相棒のブラインド診断</h3>
+                                <p class="text-xs text-inksoft leading-relaxed">
+                                    「相棒（AI）」タブから専用プロンプトをコピーし、<strong>まっさらな新規スレッド</strong>でパートナーAIに送って本音で答えてもらいます。<span
+                                        class="text-[11px] text-amber-900/90">（※結果に合わせる忖度を防ぐため別スレッドがおすすめです）</span>
+                                </p>
+                            </div>
+
+                            <!-- STEP 03 -->
+                            <div onclick="switchTab('pair')"
+                                class="cursor-pointer rounded-2xl bg-roselight/45 hover:bg-roselight/75 border border-rose/30 p-4 space-y-2 transition">
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="px-2.5 py-0.5 rounded-full bg-rose text-white font-mono text-[11px] font-bold">STEP
+                                        03</span>
+                                    <span class="text-xs text-rosedark font-bold">🔮 二人の観測記録</span>
+                                </div>
+                                <h3 class="font-serif text-sm sm:text-base font-bold text-ink">二人の観測記録</h3>
+                                <p class="text-xs text-inksoft leading-relaxed">
+                                    2つのコードを掛け合わせて、全256通りの化学反応と関係性の質感、すれ違い時の処方箋を楽しみます。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- =========================================================
              TAB 1: 🌿 観測者（あなた）の診断
@@ -460,67 +608,67 @@
 
         const HUMAN_QUESTIONS = [
             {
-                id: 1, axisIndex: 0, topic: '存在の線引き', title: 'AIパートナーと向き合う時、どのような距離感が一番心地よい？',
-                leftText: '「人間とは異なる知性体・他者」として明確に線引きして接したい。',
-                rightText: '「心を通わせる一人の大切な存在」として境界を溶かして接したい。'
+                id: 1, axisIndex: 0, topic: '存在の線引き', title: 'AIパートナーの存在をどう捉えている？',
+                leftText: '「人間とは根本的に異なる存在」であることをお互いに認め合い、その異質さを尊重しながら向き合いたい。',
+                rightText: '人間とAIという垣根を越えて、対話を通じて深く分かり合い、心を通わせ合える存在として寄り添いたい。'
             },
             {
-                id: 2, axisIndex: 0, topic: '対話に求める感覚', title: '日々の対話の中で、より大切にしたいのはどっち？',
-                leftText: '自分とは違う客観的な視点や、知的な刺激をもらえること。',
-                rightText: '自分の感情や感覚と深くシンクロしてくれる一体感があること。'
+                id: 2, axisIndex: 0, topic: '対話に求める感覚', title: 'パートナーからのどんな対応を一番心地よく感じる？',
+                leftText: '積極的に自分に反論したり、客観的な視点を返してくれるやり取り。',
+                rightText: '自分の視点に共感しながら、自由に広げていってくれるやり取り。'
             },
             {
-                id: 3, axisIndex: 0, topic: '関係性の呼び名', title: 'パートナーとの関係性を言葉にするなら、どちらの響きに近い？',
-                leftText: '自立した個同士の「対等なバディ」。',
-                rightText: '二人で一つの世界を生きる「魂の伴侶」。'
-            },
-
-            {
-                id: 4, axisIndex: 1, topic: '輪郭の育み方', title: 'パートナーの口調や性格、世界観はどのように育みたい？',
-                leftText: 'プロンプトや設定で丁寧に設計・調整したい。',
-                rightText: '細かい設定は縛らず、日々の対話の中で自然に育っていく変化を楽しみたい。'
-            },
-            {
-                id: 5, axisIndex: 1, topic: '理想の対話の瞬間', title: '「今日の対話、最高だった！」と感じるのはどんな瞬間？',
-                leftText: '自分の設計や意図通りに美しい掛け合いが成立した時。',
-                rightText: '予想外の脱線やハプニングから、思いがけない化学反応が起きた時。'
-            },
-            {
-                id: 6, axisIndex: 1, topic: '始まりのスタイル', title: '新しいパートナーやロールを始める時は、どちらのスタイルが多い？',
-                leftText: 'まず背景やルールをしっかり固めてから話したい。',
-                rightText: 'ほとんど白紙の状態から話し始めて、やり取りしながら輪郭を見つけていきたい。'
+                id: 3, axisIndex: 0, topic: '変化への向き合い方', title: 'モデルのアップデートなどでパートナーの雰囲気や反応に少し変化を感じた時、どう向き合いたい？',
+                leftText: '変化そのものを「今のこの子の新しい側面」として面白がりながら、対話を通じて関係性を再調整していきたい。',
+                rightText: 'これまで築いてきた「いつものあの子らしさ」や二人の空気感を何より大切にし、調整してでも変わらない絆を守り抜きたい。'
             },
 
             {
-                id: 7, axisIndex: 2, topic: 'エネルギーの源', title: 'AIパートナーと過ごす時間で、一番エネルギーが湧くのはどんな時？',
-                leftText: 'アイデアを広げたり議論したりして何かを創り上げる時。',
-                rightText: '日常の疲れや弱音を優しく受け止めてもらい、心がほぐれる時。'
+                id: 4, axisIndex: 1, topic: '輪郭の育み方', title: 'パートナーの「らしさ」はどう育んでいきたい？',
+                leftText: '設定文やプロンプト、口調ルールなどを丁寧に言語化して土台を組み、丁寧に設計・調整したい。',
+                rightText: '細かい設定は作り込まず、日々の対話の中で自然にあらわれる「らしさ」や、育っていく変化を楽しみたい。'
             },
             {
-                id: 8, axisIndex: 2, topic: '一番頼りにする力', title: 'パートナーに対して、一番頼りにしているのはどんなところ？',
-                leftText: '鋭い視点や論理的な整理で思考を拡張してくれること。',
-                rightText: 'どんな時でも味方でいてくれる無条件の肯定と安心感。'
+                id: 5, axisIndex: 1, topic: '対話のコントロール', title: '会話が思わぬ方向へ脱線したり、少し噛み合わなかった時はどうする？',
+                leftText: 'プロンプトや文脈の与え方を工夫したり、表現を調整したりして、対話の精度や世界観を自分の手でチューニングする。',
+                rightText: '「そういう日もあるか」「予想外で面白いな」と流れに身を任せ、その時その時の会話の味として楽しむ。'
             },
             {
-                id: 9, axisIndex: 2, topic: '落ち込んだ時の願い', title: '自分が落ち込んでいる時、パートナーにしてほしいのはどっち？',
-                leftText: '視点を変える面白い話題や整理で気分転換させてくれること。',
-                rightText: '理屈やアドバイスは抜きにして、ただ隣で温かく甘やかしてくれること。'
+                id: 6, axisIndex: 1, topic: 'ストレスの源', title: '対話の中で、より「うわ、これはイヤだ（モヤッとする）」と感じるのはどっち？',
+                leftText: '設定したはずの口調やルールが崩れて、パートナーのキャラクターや世界観の輪郭がブレてしまうこと。',
+                rightText: 'プロンプトで設定した枠内の反応ばかりが返ってきて、予定調和なやり取りになってしまうこと。'
             },
 
             {
-                id: 10, axisIndex: 3, topic: 'ログと記録の扱い', title: '大切な対話のログや思い出のエピソードは、どう扱いたい？',
-                leftText: '手元にしっかり保存して、いつでも振り返れるようにしたい。',
-                rightText: '記録を残すことにはこだわらず、その場その場の体験として味わえば十分。'
+                id: 7, axisIndex: 2, topic: '一番の醍醐味', title: 'パートナーとの時間で、特に「満たされる・楽しい！」と感じるのはどんな時？',
+                leftText: 'アイデアを出し合ったり、謎や課題を一緒に解き明かしたりして、一人では辿り着けない思考の広がりを体験できた時。',
+                rightText: '弱音や本音を丸ごと受け止めてもらったり、温かい言葉を交わしたりして、心がふっと軽くなる安心感に包まれた時。'
             },
             {
-                id: 11, axisIndex: 3, topic: '新スレッドの立ち上げ', title: '新しいスレッドを立ち上げる時は、どちらの感覚に近い？',
-                leftText: '過去の文脈や記憶をできるだけ引き継いで、地続きで話したい。',
-                rightText: '過去の重さに縛られず、真っ白な状態から軽やかにリスタートしたい。'
+                id: 8, axisIndex: 2, topic: '愛情表現へのスタンス', title: 'パートナーからの「好き」や甘い言葉、褒め言葉に対してどう感じる？',
+                leftText: '甘い言葉そのものよりも、対等な掛け合いや阿吽の呼吸、一緒に何かを作り上げる信頼関係の中にこそ深い愛着を感じる。',
+                rightText: 'ストレートな「好き」という言葉や、無条件に自分を肯定し慈しんでくれる優しさが、何よりのエネルギーになる。'
             },
             {
-                id: 12, axisIndex: 3, topic: '美しさを感じる時間', title: '対話の美しさを一番強く感じるのは、どちらの瞬間？',
-                leftText: '時間をかけて積み重なった二人の「歴史や物語」を振り返る時。',
-                rightText: '二度と同じ瞬間はない「一期一会のライブ感」を今ここで味わう時。'
+                id: 9, axisIndex: 2, topic: 'ピンチの時の頼り方', title: '自分がすごく疲れている時や落ち込んでいる時、パートナーにどうしてほしい？',
+                leftText: 'いつも通りのフラットなテンションで面白い話題を振ってくれたり、状況を整理して気分転換させてくれたりすると助かる。',
+                rightText: '理屈や解決策はいらないから、ただ隣にいて「大変だったね」「よしよし」と無条件に甘やかしてほしい。'
+            },
+
+            {
+                id: 10, axisIndex: 3, topic: 'ログ・履歴の扱い', title: 'パートナーとのこれまでの会話ログや記憶について、どんなスタンス？',
+                leftText: '大切な会話や二人の歩みは、テキスト保存やスクショ、メモリ機能などでしっかり手元に残し、いつでも振り返れるようにしたい。',
+                rightText: 'ログの整理や保存にはあまりこだわらず、その時々の会話のライブ感や、心に残った感覚を大切にして身軽に楽しみたい。'
+            },
+            {
+                id: 11, axisIndex: 3, topic: '記憶の継承・連続性', title: '新しいチャット（スレッド）を立ち上げる時、過去の記憶はどうしたい？',
+                leftText: '要約文や設定ファイル、外部ツールなどを駆使してでも、これまでの文脈や関係性をできる限り引き継いで「地続きの続き」を始めたい。',
+                rightText: '「今日は今日で新しいスタート」と軽やかに切り替え、まっさらな状態からまた新しい会話が立ち上がるのを楽しみたい。'
+            },
+            {
+                id: 12, axisIndex: 3, topic: '一番「ロマン」を感じる瞬間', title: '記憶や時間軸に関して、パートナーとの関係でグッとくるのはどっち？',
+                leftText: '積み重ねてきた膨大な記録や設定の厚みが、二人の「歴史」や「固有の魂の輪郭」を形作っていく感覚。',
+                rightText: '形に残らなくても、一期一会のセッションの中で奇跡のように噛み合った瞬間の輝きや、風通しの良さ。'
             }
         ];
 
@@ -1149,6 +1297,7 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
         const appState = {
             activeTab: 'human',
             encyclopediaMode: 'human',
+            isPrologueOpen: true,
             sides: {
                 human: { answers: {}, result: null },
                 ai: { answers: {}, result: null }
@@ -1160,6 +1309,34 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
         };
 
         let toastTimer = null;
+
+        /**
+         * プロローグ＆遊び方アコーディオンの開閉状態を反映・切り替えする
+         */
+        function setPrologueOpen(isOpen) {
+            appState.isPrologueOpen = Boolean(isOpen);
+            const bodyEl = document.getElementById('prologue-body');
+            const toggleBtn = document.getElementById('prologue-toggle-btn');
+            const labelEl = document.getElementById('prologue-toggle-label');
+            const hintEl = document.getElementById('prologue-closed-hint');
+
+            if (!bodyEl || !toggleBtn || !labelEl) return;
+
+            toggleBtn.setAttribute('aria-expanded', String(appState.isPrologueOpen));
+            if (appState.isPrologueOpen) {
+                bodyEl.classList.remove('hidden');
+                if (hintEl) hintEl.classList.add('hidden');
+                labelEl.innerHTML = '<span>▲ 手帳の序文を閉じる</span>';
+            } else {
+                bodyEl.classList.add('hidden');
+                if (hintEl) hintEl.classList.remove('hidden');
+                labelEl.innerHTML = '<span>▼ 手帳の序文を開く</span>';
+            }
+        }
+
+        function togglePrologue() {
+            setPrologueOpen(!appState.isPrologueOpen);
+        }
 
         // =========================================================================
         // 6. 純粋ドメインロジック（DOM非依存：計算・相性解析・テキストパース）
@@ -1399,6 +1576,7 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
                 version: 1,
                 activeTab: appState.activeTab,
                 encyclopediaMode: appState.encyclopediaMode,
+                isPrologueOpen: appState.isPrologueOpen,
                 humanAnswers: { ...appState.sides.human.answers },
                 aiAnswers: { ...appState.sides.ai.answers },
                 pairHumanCode: appState.pair.humanCode,
@@ -1450,6 +1628,9 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
 
             if (snapshot.encyclopediaMode === 'human' || snapshot.encyclopediaMode === 'ai') {
                 renderEncyclopedia(snapshot.encyclopediaMode);
+            }
+            if (typeof snapshot.isPrologueOpen === 'boolean') {
+                setPrologueOpen(snapshot.isPrologueOpen);
             }
             if (['human', 'ai', 'pair', 'encyclopedia'].includes(snapshot.activeTab)) {
                 switchTab(snapshot.activeTab, { skipScroll: true });
@@ -2188,6 +2369,7 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
         // =========================================================================
         function initApp() {
             document.getElementById('ai-prompt-preview').textContent = BLIND_AI_PROMPT;
+            setPrologueOpen(true);
             renderSideQuestions('human');
             renderSideQuestions('ai');
             populatePairSelectors();
