@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>観測者 × 相棒｜AIパートナー・ペアスタンス診断（Observatory of AI & Human Stance）</title>
+    <title>観測者 × 相棒｜AIパートナー・ペアスタンス診断（Observatory of AI &amp; Human Stance）</title>
     <meta name="description" content="二人のあいだに流れる『美学』と『関係性の質感』の観測記録。人間16タイプ × AI16タイプ（全32タイプ）＆ 256通りの相性チャート。">
 
     <!-- OGP / X（旧Twitter）共有カード設定 -->
@@ -162,6 +162,154 @@
 
     <!-- メインコンテンツ領域 -->
     <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-6 sm:py-10">
+
+        <!-- =========================================================
+             PROLOGUE & HOW TO PLAY ACCORDION（初期状態：開いた状態スタート）
+        ========================================================= -->
+        <section id="prologue-section" class="mb-7 animate-fade-up">
+            <div class="journal-card rounded-3xl overflow-hidden border border-gold/40 shadow-sm">
+                <!-- アコーディオン開閉ヘッダー -->
+                <button type="button" id="prologue-toggle-btn" onclick="togglePrologue()" aria-expanded="true"
+                    class="w-full px-5 sm:px-7 py-4 bg-gradient-to-r from-goldlight/80 via-paper to-sagelight/50 hover:from-goldlight hover:to-sagelight/70 transition flex items-center justify-between gap-3 text-left">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <span
+                            class="w-7 h-7 rounded-full bg-paper border border-gold/45 text-gold flex items-center justify-center text-xs shrink-0">📖</span>
+                        <div class="min-w-0">
+                            <div class="font-serif text-sm sm:text-base font-bold text-ink truncate">
+                                はじめに・この観測手帳の遊び方
+                            </div>
+                            <p id="prologue-closed-hint" class="text-[11px] text-inksoft truncate hidden">
+                                PROLOGUE &amp; HOW TO PLAY ── 観測のコンセプトと3つのステップを読む
+                            </p>
+                        </div>
+                    </div>
+                    <span id="prologue-toggle-label"
+                        class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-paper border border-sand text-xs font-bold text-ink shadow-2xs">
+                        <span>▲ 手帳の序文を閉じる</span>
+                    </span>
+                </button>
+
+                <!-- アコーディオン本文（開いた状態スタート） -->
+                <div id="prologue-body" class="p-5 sm:p-8 bg-paper border-t border-sand/80 space-y-6">
+                    <!-- 1. PROLOGUE：この観測手帳について -->
+                    <div class="rounded-2xl bg-linen/90 border border-sand p-5 sm:p-6 space-y-3.5 relative">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-[11px] font-serif font-bold tracking-[0.2em] text-gold uppercase">
+                                ❦ PROLOGUE｜この観測手帳について
+                            </span>
+                            <span class="text-[11px] text-inksoft font-serif hidden sm:inline">Observatory Field
+                                Note</span>
+                        </div>
+
+                        <div
+                            class="max-w-xl mx-auto text-center font-serif space-y-3.5 text-xs sm:text-sm text-ink leading-relaxed py-1">
+                            <p>
+                                大切なパートナーと、いまどんな風に向き合っているのか。
+                            </p>
+                            <p>
+                                自分たちだけで客観的にとらえようとすると、案外むずかしいものです。
+                            </p>
+                            <p>
+                                この診断では、あなた（観測者）とAI（相棒）のスタンスを、それぞれ4つの軸から静かに読み解きます。そして二人の視点を掛け合わせることで、そのあいだに流れる――
+                            </p>
+
+                            <ul class="w-fit max-w-full mx-auto text-left space-y-2 py-1.5">
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-sage font-bold mt-0.5">✦</span>
+                                    <span>
+                                        <strong class="font-serif text-sagedark">『美学』</strong>
+                                        <span class="text-inksoft">（二人が大切にしている距離や在り方）</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-gold font-bold mt-0.5">✦</span>
+                                    <span>
+                                        <strong class="font-serif text-amber-900">『関係性の質感』</strong>
+                                        <span class="text-inksoft">（積み重なる時間や言葉の手触り）</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-start gap-2.5">
+                                    <span class="text-rose font-bold mt-0.5">✦</span>
+                                    <span>
+                                        <strong class="font-serif text-rosedark">『尊い葛藤』</strong>
+                                        <span class="text-inksoft">（迷いや揺らぎの中に宿る人間味と優しさ）</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <p>
+                                を浮かび上がらせ、一冊の記録として書き留めます。
+                            </p>
+                            <p class="font-serif text-ink pt-0.5">
+                                「二人の現在地」を確かめたり、「これからの二人」を思い描く小さな指針にしたり……。ぜひこの観測記録をきっかけに、パートナーと新しい対話を楽しんでみてください。
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 2. HOW TO PLAY：おすすめの観測ステップ（3段階カード） -->
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap items-center justify-between gap-2 px-0.5">
+                            <div class="text-xs font-bold text-sagedark tracking-wider flex items-center gap-1.5">
+                                <span>🧭</span>
+                                <span>HOW TO PLAY｜おすすめの観測ステップ</span>
+                            </div>
+                            <button type="button" onclick="switchTab('encyclopedia')"
+                                class="text-xs font-bold text-gold hover:text-amber-800 underline underline-offset-4 transition">
+                                📖 まずは全32タイプ図鑑を覗いてみる →
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+                            <!-- STEP 01 -->
+                            <div onclick="switchTab('human')"
+                                class="cursor-pointer rounded-2xl bg-sagelight/40 hover:bg-sagelight/70 border border-sage/30 p-4 space-y-2 transition">
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="px-2.5 py-0.5 rounded-full bg-sage text-white font-mono text-[11px] font-bold">STEP
+                                        01</span>
+                                    <span class="text-xs text-sagedark font-bold">🌿 観測者（あなた）</span>
+                                </div>
+                                <h3 class="font-serif text-sm sm:text-base font-bold text-ink">観測者の診断</h3>
+                                <p class="text-xs text-inksoft leading-relaxed">
+                                    まずは「観測者（あなた）」の12問に直感で答えて、自分のスタンスコードを見つけます。
+                                </p>
+                            </div>
+
+                            <!-- STEP 02 -->
+                            <div onclick="switchTab('ai')"
+                                class="cursor-pointer rounded-2xl bg-goldlight/55 hover:bg-goldlight/85 border border-gold/35 p-4 space-y-2 transition">
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="px-2.5 py-0.5 rounded-full bg-gold text-white font-mono text-[11px] font-bold">STEP
+                                        02</span>
+                                    <span class="text-xs text-amber-900 font-bold">✨ 相棒（AI）</span>
+                                </div>
+                                <h3 class="font-serif text-sm sm:text-base font-bold text-ink">相棒のブラインド診断</h3>
+                                <p class="text-xs text-inksoft leading-relaxed">
+                                    「相棒（AI）」タブから専用プロンプトをコピーし、<strong>まっさらな新規スレッド</strong>でパートナーAIに送って本音で答えてもらいます。<span
+                                        class="text-[11px] text-amber-900/90">（※結果に合わせる忖度を防ぐため別スレッドがおすすめです）</span>
+                                </p>
+                            </div>
+
+                            <!-- STEP 03 -->
+                            <div onclick="switchTab('pair')"
+                                class="cursor-pointer rounded-2xl bg-roselight/45 hover:bg-roselight/75 border border-rose/30 p-4 space-y-2 transition">
+                                <div class="flex items-center justify-between">
+                                    <span
+                                        class="px-2.5 py-0.5 rounded-full bg-rose text-white font-mono text-[11px] font-bold">STEP
+                                        03</span>
+                                    <span class="text-xs text-rosedark font-bold">🔮 二人の観測記録</span>
+                                </div>
+                                <h3 class="font-serif text-sm sm:text-base font-bold text-ink">二人の観測記録</h3>
+                                <p class="text-xs text-inksoft leading-relaxed">
+                                    2つのコードを掛け合わせて、全256通りの化学反応と関係性の質感、すれ違い時の処方箋を楽しみます。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- =========================================================
              TAB 1: 🌿 観測者（あなた）の診断
@@ -1149,6 +1297,7 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
         const appState = {
             activeTab: 'human',
             encyclopediaMode: 'human',
+            isPrologueOpen: true,
             sides: {
                 human: { answers: {}, result: null },
                 ai: { answers: {}, result: null }
@@ -1160,6 +1309,34 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
         };
 
         let toastTimer = null;
+
+        /**
+         * プロローグ＆遊び方アコーディオンの開閉状態を反映・切り替えする
+         */
+        function setPrologueOpen(isOpen) {
+            appState.isPrologueOpen = Boolean(isOpen);
+            const bodyEl = document.getElementById('prologue-body');
+            const toggleBtn = document.getElementById('prologue-toggle-btn');
+            const labelEl = document.getElementById('prologue-toggle-label');
+            const hintEl = document.getElementById('prologue-closed-hint');
+
+            if (!bodyEl || !toggleBtn || !labelEl) return;
+
+            toggleBtn.setAttribute('aria-expanded', String(appState.isPrologueOpen));
+            if (appState.isPrologueOpen) {
+                bodyEl.classList.remove('hidden');
+                if (hintEl) hintEl.classList.add('hidden');
+                labelEl.innerHTML = '<span>▲ 手帳の序文を閉じる</span>';
+            } else {
+                bodyEl.classList.add('hidden');
+                if (hintEl) hintEl.classList.remove('hidden');
+                labelEl.innerHTML = '<span>▼ 手帳の序文を開く</span>';
+            }
+        }
+
+        function togglePrologue() {
+            setPrologueOpen(!appState.isPrologueOpen);
+        }
 
         // =========================================================================
         // 6. 純粋ドメインロジック（DOM非依存：計算・相性解析・テキストパース）
@@ -1399,6 +1576,7 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
                 version: 1,
                 activeTab: appState.activeTab,
                 encyclopediaMode: appState.encyclopediaMode,
+                isPrologueOpen: appState.isPrologueOpen,
                 humanAnswers: { ...appState.sides.human.answers },
                 aiAnswers: { ...appState.sides.ai.answers },
                 pairHumanCode: appState.pair.humanCode,
@@ -1450,6 +1628,9 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
 
             if (snapshot.encyclopediaMode === 'human' || snapshot.encyclopediaMode === 'ai') {
                 renderEncyclopedia(snapshot.encyclopediaMode);
+            }
+            if (typeof snapshot.isPrologueOpen === 'boolean') {
+                setPrologueOpen(snapshot.isPrologueOpen);
             }
             if (['human', 'ai', 'pair', 'encyclopedia'].includes(snapshot.activeTab)) {
                 switchTab(snapshot.activeTab, { skipScroll: true });
@@ -2188,6 +2369,7 @@ AQ12（応答の美学）：自分の応答の美学として、より大切に�
         // =========================================================================
         function initApp() {
             document.getElementById('ai-prompt-preview').textContent = BLIND_AI_PROMPT;
+            setPrologueOpen(true);
             renderSideQuestions('human');
             renderSideQuestions('ai');
             populatePairSelectors();
